@@ -1,0 +1,35 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 #!/bin/bash\
+\
+# List of alpha values\
+alphas=(1 10 100)\
+\
+# Loop through each alpha value\
+for alpha in "$\{alphas[@]\}"; do\
+  echo "Running dataset preparation for alpha=$alpha"\
+  \
+  # Generate the dataset for the current alpha value\
+  python -m power_of_choice.dataset_preparation alpha=$alpha\
+  \
+  # Run the simulations for the current alpha value\
+  echo "Running simulations for alpha=$alpha"\
+\
+  python -m power_of_choice.main\
+  python -m power_of_choice.main variant="base" strategy.d=20 strategy.ck=9\
+  python -m power_of_choice.main variant="cpow" strategy.d=20 strategy.ck=9\
+  python -m power_of_choice.main variant="rpow" strategy.d=60 strategy.ck=9\
+\
+  python -m power_of_choice.pow_so\
+  python -m power_of_choice.pow_uo optimizer=uo\
+  python -m power_of_choice.pow_rt optimizer=rt\
+  python -m power_of_choice.pow_ecto optimizer=ecto\
+done\
+\
+echo "All simulations completed."\
+}
