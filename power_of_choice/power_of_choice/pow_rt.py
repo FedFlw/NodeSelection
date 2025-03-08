@@ -4,7 +4,6 @@ It includes processioning the dataset, instantiate strategy, specify how the glo
 model is going to be evaluated, etc. At the end, this script saves the results.
 """
 import os
-
 # these are the basic packages you'll need here
 # feel free to remove some if aren't needed
 from logging import INFO
@@ -21,12 +20,12 @@ from flwr.simulation.ray_transport.utils import enable_tf_gpu_growth
 from hydra.core.hydra_config import HydraConfig
 from hydra.utils import instantiate
 from omegaconf import DictConfig, OmegaConf
-from strategy import RTFedAvg
 
-from power_of_choice.client_rt import gen_client_fn
-from power_of_choice.models import create_CNN_model, create_MLP_model
-from power_of_choice.server import PowerOfChoiceCommAndCompVariant, PowerOfChoiceServer
-from power_of_choice.utils import save_results_as_pickle
+from client_rt import gen_client_fn
+from models import create_CNN_model, create_MLP_model
+from server import PowerOfChoiceCommAndCompVariant, PowerOfChoiceServer
+from strategy import RTFedAvg
+from utils import save_results_as_pickle
 
 enable_tf_gpu_growth()
 
@@ -130,9 +129,9 @@ def main(cfg: DictConfig) -> None:
 
         # The `evaluate` function will be called after every round
         def evaluate(
-            server_round: int,
-            parameters: fl.common.NDArrays,
-            config: Dict[str, fl.common.Scalar],
+                server_round: int,
+                parameters: fl.common.NDArrays,
+                config: Dict[str, fl.common.Scalar],
         ) -> Optional[Tuple[float, Dict[str, fl.common.Scalar]]]:
             model.set_weights(parameters)  # Update model with the latest parameters
             loss, accuracy = model.evaluate(x_test, y_test, verbose=2)
@@ -177,8 +176,8 @@ def main(cfg: DictConfig) -> None:
             on_evaluate_config_fn=get_on_evaluate_config(is_cpow),
             fit_metrics_aggregation_fn=get_fit_metrics_aggregation_fn(),
             max_local_epochs=cfg.epochs_max,
-            batch_size = cfg.batch_size_default,
-            fraction_samples = cfg.fraction_samples_default,
+            batch_size=cfg.batch_size_default,
+            fraction_samples=cfg.fraction_samples_default,
             use_RT=True
         )
     elif is_rand:
@@ -192,8 +191,8 @@ def main(cfg: DictConfig) -> None:
             on_evaluate_config_fn=get_on_evaluate_config(is_cpow, cfg.b),
             fit_metrics_aggregation_fn=get_fit_metrics_aggregation_fn(),
             max_local_epochs=cfg.epochs_max,
-            batch_size = cfg.batch_size_default,
-            fraction_samples = cfg.fraction_samples_default,
+            batch_size=cfg.batch_size_default,
+            fraction_samples=cfg.fraction_samples_default,
             use_RT=True
         )
     else:
@@ -204,8 +203,8 @@ def main(cfg: DictConfig) -> None:
             on_evaluate_config_fn=get_on_evaluate_config(is_cpow, cfg.b),
             fit_metrics_aggregation_fn=get_fit_metrics_aggregation_fn(),
             max_local_epochs=cfg.epochs_max,
-            batch_size = cfg.batch_size_default,
-            fraction_samples = cfg.fraction_samples_default,
+            batch_size=cfg.batch_size_default,
+            fraction_samples=cfg.fraction_samples_default,
             use_RT=True
         )
 

@@ -1,15 +1,10 @@
 import argparse
-import os
 import pickle
 import pandas as pd  # Added import for pandas
 from logging import INFO
 
 from flwr.common.logger import log
 
-from power_of_choice.utils import (
-    plot_metrics_from_histories,
-    plot_variances_training_loss_from_history,
-)
 
 def extract_data_from_history(history, round_numbers):
     """Extract data from History at specified round numbers."""
@@ -24,6 +19,7 @@ def extract_data_from_history(history, round_numbers):
             }
             extracted_data.append(data_at_round)
     return extracted_data
+
 
 def create_table(histories, round_numbers):
     """Create a table with data from History objects at specified round numbers."""
@@ -44,6 +40,7 @@ def create_table(histories, round_numbers):
     df = pd.DataFrame(table_data)
     return df
 
+
 def main():
     parser = argparse.ArgumentParser(description="Plot Distributed Losses from History")
     parser.add_argument(
@@ -61,7 +58,7 @@ def main():
     args = parser.parse_args()
 
     round_numbers_of_interest = [100, 200]
-    
+
     # Load and display the table
     for path in args.paths:
         with open(path, "rb") as pkl_file:
@@ -74,6 +71,7 @@ def main():
 
         table = create_table([(title, history)], round_numbers_of_interest)
         print(table)
+
 
 if __name__ == "__main__":
     main()

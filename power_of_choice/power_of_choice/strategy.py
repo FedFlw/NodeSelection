@@ -40,33 +40,33 @@ class PowerOfChoice(FedAvg):
 
     # pylint: disable=too-many-arguments,too-many-instance-attributes, line-too-long
     def __init__(
-        self,
-        *,
-        fraction_fit: float = 1.0,
-        fraction_evaluate: float = 1.0,
-        min_fit_clients: int = 1,
-        min_evaluate_clients: int = 1,
-        min_available_clients: int = 1,
-        evaluate_fn: Optional[
-            Callable[
-                [int, NDArrays, Dict[str, Scalar]],
-                Optional[Tuple[float, Dict[str, Scalar]]],
-            ]
-        ] = None,
-        on_fit_config_fn: Optional[Callable[[int], Dict[str, Scalar]]] = None,
-        on_evaluate_config_fn: Optional[Callable[[int], Dict[str, Scalar]]] = None,
-        accept_failures: bool = True,
-        initial_parameters: Optional[Parameters] = None,
-        fit_metrics_aggregation_fn: Optional[MetricsAggregationFn] = None,
-        evaluate_metrics_aggregation_fn: Optional[MetricsAggregationFn] = None,
-        d: int,
-        ck: int,
-        variant: Optional[str] = "base",
-        atmp: Optional[Dict[str, float]] = None,
-        max_local_epochs: int = 5,
-        batch_size: int = 32,
-        fraction_samples: float = 1.0,
-        use_RT: bool = False
+            self,
+            *,
+            fraction_fit: float = 1.0,
+            fraction_evaluate: float = 1.0,
+            min_fit_clients: int = 1,
+            min_evaluate_clients: int = 1,
+            min_available_clients: int = 1,
+            evaluate_fn: Optional[
+                Callable[
+                    [int, NDArrays, Dict[str, Scalar]],
+                    Optional[Tuple[float, Dict[str, Scalar]]],
+                ]
+            ] = None,
+            on_fit_config_fn: Optional[Callable[[int], Dict[str, Scalar]]] = None,
+            on_evaluate_config_fn: Optional[Callable[[int], Dict[str, Scalar]]] = None,
+            accept_failures: bool = True,
+            initial_parameters: Optional[Parameters] = None,
+            fit_metrics_aggregation_fn: Optional[MetricsAggregationFn] = None,
+            evaluate_metrics_aggregation_fn: Optional[MetricsAggregationFn] = None,
+            d: int,
+            ck: int,
+            variant: Optional[str] = "base",
+            atmp: Optional[Dict[str, float]] = None,
+            max_local_epochs: int = 5,
+            batch_size: int = 32,
+            fraction_samples: float = 1.0,
+            use_RT: bool = False
     ) -> None:
         """Federated Averaging strategy.
 
@@ -109,8 +109,8 @@ class PowerOfChoice(FedAvg):
         super().__init__()
 
         if (
-            min_fit_clients > min_available_clients
-            or min_evaluate_clients > min_available_clients
+                min_fit_clients > min_available_clients
+                or min_evaluate_clients > min_available_clients
         ):
             log(WARNING, WARNING_MIN_AVAILABLE_CLIENTS_TOO_LOW)
 
@@ -139,7 +139,7 @@ class PowerOfChoice(FedAvg):
         self.use_RT = use_RT
 
     def configure_fit(
-        self, server_round: int, parameters: Parameters, client_manager: ClientManager
+            self, server_round: int, parameters: Parameters, client_manager: ClientManager
     ) -> List[Tuple[ClientProxy, FitIns]]:
         """Configure the next round of training."""
 
@@ -231,7 +231,7 @@ class PowerOfChoice(FedAvg):
                 # Compute scaling factor
                 scale_factor = ips / max_ips
 
-                if(ips == max_ips):
+                if (ips == max_ips):
                     local_epochs = self.max_local_epochs
                 else:
                     local_epochs = max(1, int(self.max_local_epochs * scale_factor))
@@ -243,7 +243,8 @@ class PowerOfChoice(FedAvg):
                     "learning_rate": learning_rate,
                 }
 
-                print(f"Client {client.cid} - IPS {ips} - Local epochs {local_epochs} - Fraction samples {self.fraction_samples}")
+                print(
+                    f"Client {client.cid} - IPS {ips} - Local epochs {local_epochs} - Fraction samples {self.fraction_samples}")
 
                 # Create fit instruction
                 fit_ins.append((client, FitIns(parameters, config)))
@@ -252,11 +253,11 @@ class PowerOfChoice(FedAvg):
         return fit_ins
 
     def configure_evaluate(
-        self,
-        server_round: int,
-        parameters: Parameters,
-        client_manager: ClientManager,
-        first_phase: bool = False,
+            self,
+            server_round: int,
+            parameters: Parameters,
+            client_manager: ClientManager,
+            first_phase: bool = False,
     ) -> List[Tuple[ClientProxy, EvaluateIns]]:
         """Configure the next round of evaluation."""
         # Do not configure federated evaluation if fraction eval is 0.
@@ -355,32 +356,33 @@ class PowerOfChoice(FedAvg):
         for result in res_eval:
             self.atmp[result[0].cid] = result[1].loss
 
+
 class RTFedAvg(FedAvg):
     # pylint: disable=too-many-arguments,too-many-instance-attributes, line-too-long
     def __init__(
-        self,
-        *,
-        fraction_fit: float = 1.0,
-        fraction_evaluate: float = 1.0,
-        min_fit_clients: int = 2,
-        min_evaluate_clients: int = 2,
-        min_available_clients: int = 2,
-        evaluate_fn: Optional[
-            Callable[
-                [int, NDArrays, Dict[str, Scalar]],
-                Optional[Tuple[float, Dict[str, Scalar]]],
-            ]
-        ] = None,
-        on_fit_config_fn: Optional[Callable[[int], Dict[str, Scalar]]] = None,
-        on_evaluate_config_fn: Optional[Callable[[int], Dict[str, Scalar]]] = None,
-        accept_failures: bool = True,
-        initial_parameters: Optional[Parameters] = None,
-        fit_metrics_aggregation_fn: Optional[MetricsAggregationFn] = None,
-        evaluate_metrics_aggregation_fn: Optional[MetricsAggregationFn] = None,
-        max_local_epochs: int = 5,
-        batch_size: int = 32,
-        fraction_samples: float = 1.0,
-        use_RT: bool = False
+            self,
+            *,
+            fraction_fit: float = 1.0,
+            fraction_evaluate: float = 1.0,
+            min_fit_clients: int = 2,
+            min_evaluate_clients: int = 2,
+            min_available_clients: int = 2,
+            evaluate_fn: Optional[
+                Callable[
+                    [int, NDArrays, Dict[str, Scalar]],
+                    Optional[Tuple[float, Dict[str, Scalar]]],
+                ]
+            ] = None,
+            on_fit_config_fn: Optional[Callable[[int], Dict[str, Scalar]]] = None,
+            on_evaluate_config_fn: Optional[Callable[[int], Dict[str, Scalar]]] = None,
+            accept_failures: bool = True,
+            initial_parameters: Optional[Parameters] = None,
+            fit_metrics_aggregation_fn: Optional[MetricsAggregationFn] = None,
+            evaluate_metrics_aggregation_fn: Optional[MetricsAggregationFn] = None,
+            max_local_epochs: int = 5,
+            batch_size: int = 32,
+            fraction_samples: float = 1.0,
+            use_RT: bool = False
     ) -> None:
         """Federated Averaging strategy.
 
@@ -420,8 +422,8 @@ class RTFedAvg(FedAvg):
         super().__init__()
 
         if (
-            min_fit_clients > min_available_clients
-            or min_evaluate_clients > min_available_clients
+                min_fit_clients > min_available_clients
+                or min_evaluate_clients > min_available_clients
         ):
             log(WARNING, WARNING_MIN_AVAILABLE_CLIENTS_TOO_LOW)
 
@@ -442,9 +444,8 @@ class RTFedAvg(FedAvg):
         self.fraction_samples = fraction_samples
         self.use_RT = use_RT
 
-
     def configure_fit(
-        self, server_round: int, parameters: Parameters, client_manager: ClientManager
+            self, server_round: int, parameters: Parameters, client_manager: ClientManager
     ) -> List[Tuple[ClientProxy, FitIns]]:
         """Configure the next round of training."""
 
@@ -491,7 +492,7 @@ class RTFedAvg(FedAvg):
                 # Compute scaling factor
                 scale_factor = ips / max_ips
 
-                if(ips == max_ips):
+                if (ips == max_ips):
                     local_epochs = self.max_local_epochs
                 else:
                     local_epochs = max(1, int(self.max_local_epochs * scale_factor))
@@ -503,7 +504,8 @@ class RTFedAvg(FedAvg):
                     "learning_rate": learning_rate,
                 }
 
-                print(f"Client {client.cid} - IPS {ips} - Local epochs {local_epochs} - Fraction samples {self.fraction_samples}")
+                print(
+                    f"Client {client.cid} - IPS {ips} - Local epochs {local_epochs} - Fraction samples {self.fraction_samples}")
 
                 # Create fit instruction
                 fit_ins.append((client, FitIns(parameters, config)))

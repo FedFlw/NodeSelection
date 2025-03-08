@@ -5,22 +5,21 @@ example, you may define here things like: loading a model from a checkpoint, sav
 results, plotting.
 """
 
-
 import pickle
 from pathlib import Path
 from secrets import token_hex
 from typing import Dict, List, Optional, Tuple, Union
 
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 from flwr.server.history import History
 
 
 def save_results_as_pickle(
-    history: History,
-    file_path: Union[str, Path],
-    extra_results: Optional[Dict] = None,
-    default_filename: Optional[str] = "results.pkl",
+        history: History,
+        file_path: Union[str, Path],
+        extra_results: Optional[Dict] = None,
+        default_filename: Optional[str] = "results.pkl",
 ) -> None:
     """Save results from simulation to pickle.
 
@@ -78,9 +77,9 @@ def save_results_as_pickle(
 
 
 def plot_dloss_from_history(
-    hist: History,
-    save_plot_path: Path,
-    suffix: Optional[str] = "",
+        hist: History,
+        save_plot_path: Path,
+        suffix: Optional[str] = "",
 ) -> None:
     """Plot from Flower server History LOSS ONLY, TO BE REMOVED LATER.
 
@@ -113,9 +112,9 @@ def plot_dloss_from_history(
 
 
 def plot_metric_from_history(
-    hist: History,
-    save_plot_path: Path,
-    suffix: Optional[str] = "",
+        hist: History,
+        save_plot_path: Path,
+        suffix: Optional[str] = "",
 ) -> None:
     """Plot from Flower server History.
 
@@ -164,9 +163,9 @@ def plot_metric_from_history(
 
 
 def plot_variance_training_loss_from_history(
-    hist: History,
-    save_plot_path: Path,
-    suffix: Optional[str] = "",
+        hist: History,
+        save_plot_path: Path,
+        suffix: Optional[str] = "",
 ) -> None:
     """Plot from Flower server History.
 
@@ -204,6 +203,7 @@ def plot_variance_training_loss_from_history(
 
     plt.savefig(Path(save_plot_path) / Path(f"Plot_loss_variance{suffix}.eps"), format='eps', bbox_inches='tight')
     plt.close()
+
 
 """
 def plot_metrics_from_histories(
@@ -330,16 +330,18 @@ def plot_metrics_from_histories(
     plt.savefig(Path(save_plot_path) / Path(f"W{window_size}_{model}_a{alpha}_Training_loss{suffix}.eps"), format='eps', bbox_inches='tight')
     plt.close()
 """
+
+
 def plot_metrics_from_histories(
-    title_and_histories: List[Tuple[str, History]],
-    save_plot_path: Path,
-    suffix: Optional[str] = "",
+        title_and_histories: List[Tuple[str, History]],
+        save_plot_path: Path,
+        suffix: Optional[str] = "",
 ) -> None:
     """Plot only accuracy from Flower server Histories."""
 
     # Font and line sizes
-    font_size = 30  
-    line_width = 3  
+    font_size = 30
+    line_width = 3
 
     # Plot Test Accuracy
     fig1, ax1 = plt.subplots(figsize=(17, 14))
@@ -370,11 +372,10 @@ def plot_metrics_from_histories(
     plt.close()
 
 
-
 def plot_variances_training_loss_from_history(
-    title_and_histories: List[Tuple[str, History]],
-    save_plot_path: Path,
-    suffix: Optional[str] = "",
+        title_and_histories: List[Tuple[str, History]],
+        save_plot_path: Path,
+        suffix: Optional[str] = "",
 ) -> None:
     """Plot variances from Flower server History.
 
@@ -419,7 +420,7 @@ def plot_variances_training_loss_from_history(
     # Configure plot
     ax1.set_xlabel("Communication round", fontsize=font_size)
     ax1.set_ylabel("Training loss variance", fontsize=font_size)
-    ax1.legend(fontsize=font_size+4)
+    ax1.legend(fontsize=font_size + 4)
 
     # Add gridlines
     ax1.grid(True)
@@ -428,15 +429,16 @@ def plot_variances_training_loss_from_history(
     ax1.tick_params(axis='both', which='major', labelsize=font_size)
 
     # Add a title to the figure
-    plt.title("MLP on MNIST with alpha=0.6 | Training Loss Variance", fontsize=font_size+12)
+    plt.title("MLP on MNIST with alpha=0.6 | Training Loss Variance", fontsize=font_size + 12)
     plt.tight_layout()
     plt.savefig(Path(save_plot_path) / Path(f"Plot_metrics{suffix}.png"), format='png', bbox_inches='tight')
     plt.close()
 
+
 def log_time_metrics(
-    title_and_histories: List[Tuple[str, History]],
-    log_file_path: Path,
-    suffix: Optional[str] = "",
+        title_and_histories: List[Tuple[str, History]],
+        log_file_path: Path,
+        suffix: Optional[str] = "",
 ) -> None:
     """Computes time metrics from Flower server History and logs them to a file.
 
@@ -476,6 +478,6 @@ def log_time_metrics(
             log_file.write(f"Average max estimated time: {avg_max_estimated_times}\n")
             log_file.write(f"Variance estimated time: {variance_estimated_times}\n")
             log_file.write(f"Average variance estimated time: {avg_variance_estimated_times}\n")
-            log_file.write("\n") 
-            
+            log_file.write("\n")
+
     log_file.close()

@@ -1,9 +1,11 @@
-from typing import Callable
-from models import create_CNN_model
-from dataset import load_dataset
-import flwr as fl
-import numpy as np
 import math
+from typing import Callable
+
+import flwr as fl
+
+from dataset import load_dataset
+from models import create_CNN_model
+
 
 class FlwrClient(fl.client.NumPyClient):
     def __init__(self, model, x_train, y_train) -> None:
@@ -25,13 +27,12 @@ class FlwrClient(fl.client.NumPyClient):
     def get_properties(self, config):
         """Return the data size along with any other properties."""
         return {"data_size": len(self.x_train)}
-        
+
     def fit(self, parameters, config):
         self.set_parameters(parameters)
 
         epochs = config.get("local_epochs", 2)
         batch_size = config.get("batch_size", 32)
-
 
         print(f"Client training on {len(self.x_train)} samples for {epochs} epochs with batch size {batch_size}")
 
@@ -56,6 +57,7 @@ class FlwrClient(fl.client.NumPyClient):
         # Return updated model weights and training metrics
         return self.get_parameters(config), len(self.x_train), {"training_loss": history.history["loss"][-1
         '''
+
     def evaluate(self, parameters, config):
         self.set_parameters(parameters)
 
@@ -69,14 +71,15 @@ class FlwrClient(fl.client.NumPyClient):
 
 def gen_client_fn(is_cnn: bool = False) -> Callable[[str], fl.client.Client]:
     """Create a function that generates clients with either CNN or MLP model."""
+
     def client_fn(cid: str) -> fl.client.Client:
         # Dynamically load the model based on the `is_cnn` flag
         if is_cnn:
             model = create_CNN_model()  # Use CNN model
         else:
-            model = create_CNN_model()  
+            model = create_CNN_model()
 
-        # Compile the model
+            # Compile the model
         model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
 
         # Load the client's dataset partition

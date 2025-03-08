@@ -4,16 +4,17 @@ Please overwrite `flwr.client.NumPyClient` or `flwr.client.Client` and create a 
 to instantiate your client.
 """
 
+import math
 from typing import Callable, Dict, Tuple
-from models import create_CNN_model
-from models import create_MLP_model
-from dataset import load_dataset
-from flwr.common import Config, Scalar
-from omegaconf import DictConfig
-import tensorflow as tf
+
 import flwr as fl
 import numpy as np
-import math
+import tensorflow as tf
+from flwr.common import Config, Scalar
+
+from dataset import load_dataset
+from models import create_CNN_model
+
 
 class FlwrClient(fl.client.NumPyClient):
     def __init__(self, model, x_train, y_train, ips, epochs, fraction_samples, batch_size) -> None:
@@ -22,7 +23,7 @@ class FlwrClient(fl.client.NumPyClient):
         self.ips = ips
         self.epochs = epochs
         self.fraction_samples = fraction_samples
-        self.batch_size = batch_size 
+        self.batch_size = batch_size
         split_idx = math.floor(len(x_train) * 0.95)  # Use 5% of x_train for validation
         self.x_train, self.y_train = x_train[:split_idx], y_train[:split_idx]
         self.x_val, self.y_val = x_train[split_idx:], y_train[split_idx:]
@@ -41,9 +42,9 @@ class FlwrClient(fl.client.NumPyClient):
         return self.model.get_weights()
 
     def fit(self, parameters, config):
-        epochs = self.epochs     
+        epochs = self.epochs
         fraction_samples = self.fraction_samples
-        batch_size = self.batch_size  
+        batch_size = self.batch_size
 
         learning_rate = config["learning_rate"]
 
@@ -72,7 +73,8 @@ class FlwrClient(fl.client.NumPyClient):
         self.model.set_weights(parameters)
 
         history = self.model.fit(x_train_selected, y_train_selected, batch_size=batch_size, epochs=epochs, verbose=2)
-        return self.model.get_weights(), len(self.x_train), {"training_loss": history.history['loss'][-1], "estimated_time": estimated_time}
+        return self.model.get_weights(), len(self.x_train), {"training_loss": history.history['loss'][-1],
+                                                             "estimated_time": estimated_time}
 
     def evaluate(self, parameters, config):
         self.model.set_weights(parameters)
@@ -96,15 +98,15 @@ class FlwrClient(fl.client.NumPyClient):
         return loss, len(self.x_val), {"accuracy": acc}
 
 
-def gen_client_fn(ips_mean: int, ips_var: int, epochs: Tuple[int, int], fraction_samples: Tuple[int, int], batch_size: Tuple[int, int], num_clients: int, is_cnn: bool = False) -> Callable[[str], fl.client.Client]:
-
+def gen_client_fn(ips_mean: int, ips_var: int, epochs: Tuple[int, int], fraction_samples: Tuple[int, int],
+                  batch_size: Tuple[int, int], num_clients: int, is_cnn: bool = False) -> Callable[
+    [str], fl.client.Client]:
     # Generate num_clients random ips from uniform distribution
     ips_min = ips_mean - ips_var
     ips_max = ips_mean + ips_var
     ips_dict = {}
     for i in range(0, num_clients):
         ips_dict.update({str(i): np.random.uniform(ips_min, ips_max)})
-
 
     # Generate epochs, fraction_samples, and batch_size for each client from a uniform distribution
     epochs_min, epochs_max = epochs
@@ -131,15 +133,16 @@ def gen_client_fn(ips_mean: int, ips_var: int, epochs: Tuple[int, int], fraction
         fraction_samples_dict[str(i)] = fraction_samples_rounded
         batch_size_dict[str(i)] = batch_size_rounded
 
-        print(f"Client {i} epochs: {epochs_dict[str(i)]}, fraction_samples: {fraction_samples_dict[str(i)]}, batch_size: {batch_size_dict[str(i)]}")
+        print(
+            f"Client {i} epochs: {epochs_dict[str(i)]}, fraction_samples: {fraction_samples_dict[str(i)]}, batch_size: {batch_size_dict[str(i)]}")
 
     def client_fn(cid: str) -> fl.client.Client:
         # Load model
-        if(is_cnn):
+        if (is_cnn):
             model = create_CNN_model()
         else:
             model = create_CNN_model()
-        
+
         model.compile("sgd", "sparse_categorical_crossentropy", metrics=["accuracy"])
 
         ips = ips_dict[cid]
@@ -153,5 +156,5 @@ def gen_client_fn(ips_mean: int, ips_var: int, epochs: Tuple[int, int], fraction
 
         # Create and return client
         return FlwrClient(model, x_train_cid, y_train_cid, ips, epochs, fraction_samples, batch_size)
-    
+
     return client_fn

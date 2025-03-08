@@ -99,9 +99,9 @@ class PowerOfChoiceServer(Server):
         return history
 
     def evaluate_first_phase(
-        self,
-        server_round: int,
-        timeout: Optional[float],
+            self,
+            server_round: int,
+            timeout: Optional[float],
     ) -> Optional[List[Tuple[ClientProxy, EvaluateRes]]]:
         """Estimate local losses on a number of clients."""
         # Get clients and their respective instructions from strategy

@@ -12,8 +12,8 @@ import numpy as np
 import tensorflow as tf
 from flwr.common import Config, Scalar
 
-from power_of_choice.dataset import load_dataset
-from power_of_choice.models import create_CNN_model, create_MLP_model
+from dataset import load_dataset
+from models import create_CNN_model
 
 
 class FlwrClient(fl.client.NumPyClient):

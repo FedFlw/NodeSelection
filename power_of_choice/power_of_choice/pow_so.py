@@ -3,28 +3,29 @@
 It includes processioning the dataset, instantiate strategy, specify how the global
 model is going to be evaluated, etc. At the end, this script saves the results.
 """
+import os
 # these are the basic packages you'll need here
 # feel free to remove some if aren't needed
 from logging import INFO
-from math import floor
-import os
-from typing import Callable, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
+
+import flwr as fl
+import hydra
+import numpy as np
 from flwr.common.logger import log
 from flwr.common.typing import Metrics
+from flwr.server.client_manager import SimpleClientManager
 from flwr.server.server import Server
 from flwr.server.strategy.fedavg import FedAvg
-from server import PowerOfChoiceCommAndCompVariant
-from models import create_MLP_model, create_CNN_model
-from utils import save_results_as_pickle
-from server import PowerOfChoiceServer
-from client_so import gen_client_fn
-from flwr.server.client_manager import SimpleClientManager
-import hydra
-import flwr as fl
-import numpy as np
 from hydra.core.hydra_config import HydraConfig
 from hydra.utils import instantiate
 from omegaconf import DictConfig, OmegaConf
+
+from client_so import gen_client_fn
+from models import create_MLP_model, create_CNN_model
+from server import PowerOfChoiceCommAndCompVariant
+from server import PowerOfChoiceServer
+from utils import save_results_as_pickle
 
 
 @hydra.main(config_path="conf", config_name="base", version_base=None)
@@ -91,12 +92,13 @@ def main(cfg: DictConfig) -> None:
             config["local_epochs"] = cfg.local_epochs
             config["fraction_samples"] = cfg.fraction_samples
 
-            print(f"Round {server_round} training config: batch_size={config['batch_size']}, local_epochs={config['local_epochs']}, learning_rate={config['learning_rate']}")
+            print(
+                f"Round {server_round} training config: batch_size={config['batch_size']}, local_epochs={config['local_epochs']}, learning_rate={config['learning_rate']}")
 
             return config
-        
+
         return fit_config
-    
+
     def get_fit_metrics_aggregation_fn():
         def fit_metrics_aggregation_fn(results: List[Tuple[int, Metrics]]) -> Metrics:
             # Initialize lists to store training losses
@@ -124,9 +126,9 @@ def main(cfg: DictConfig) -> None:
             }
 
             return aggregated_metrics
-        
+
         return fit_metrics_aggregation_fn
-    
+
     def get_on_evaluate_config(is_cpow: bool, b: Optional[int] = None):
         def evaluate_config(server_round: int):
             """Return evaluation configuration dict for each round.
@@ -143,12 +145,12 @@ def main(cfg: DictConfig) -> None:
                 config["b"] = b
 
             return config
-        
+
         return evaluate_config
-    
+
     def get_evaluate_fn(model):
         """Return an evaluation function for server-side evaluation."""
-        
+
         print(f"Current folder is {os.getcwd()}")
 
         test_folder = "cifar10"
@@ -161,21 +163,21 @@ def main(cfg: DictConfig) -> None:
 
         # The `evaluate` function will be called after every round
         def evaluate(
-            server_round: int,
-            parameters: fl.common.NDArrays,
-            config: Dict[str, fl.common.Scalar],
+                server_round: int,
+                parameters: fl.common.NDArrays,
+                config: Dict[str, fl.common.Scalar],
         ) -> Optional[Tuple[float, Dict[str, fl.common.Scalar]]]:
             model.set_weights(parameters)  # Update model with the latest parameters
             loss, accuracy = model.evaluate(x_test, y_test, verbose=2)
             return loss, {"accuracy": accuracy}
 
         return evaluate
-    
+
     if cfg.is_cnn:
         server_model = create_CNN_model()
     else:
         server_model = create_MLP_model()
-    
+
     server_model.compile("adam", "sparse_categorical_crossentropy", metrics=["accuracy"])
 
     is_cpow = False
@@ -188,7 +190,6 @@ def main(cfg: DictConfig) -> None:
     elif cfg.variant == "rand":
         is_rand = True
 
-    
     # instantiate strategy according to config. Here we pass other arguments
     # that are only defined at run time.
     if is_rpow:
@@ -196,7 +197,7 @@ def main(cfg: DictConfig) -> None:
         atmp = {}
         for i in range(cfg.num_clients):
             atmp[str(i)] = float("inf")
-        
+
         # Instantiate strategy
         strategy = instantiate(
             cfg.strategy,
@@ -254,7 +255,7 @@ def main(cfg: DictConfig) -> None:
             "num_cpus": cfg.client_resources.num_cpus,
             "num_gpus": cfg.client_resources.num_gpus,
         },
-        server = server,
+        server=server,
         ray_init_args=ray_init_args,
     )
 
@@ -289,5 +290,7 @@ def main(cfg: DictConfig) -> None:
     #     save_path,
     #     (file_suffix),
     # )
+
+
 if __name__ == "__main__":
     main()
