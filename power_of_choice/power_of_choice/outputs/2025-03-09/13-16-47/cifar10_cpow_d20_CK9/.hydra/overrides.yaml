@@ -1,0 +1,4 @@
+- optimizer=uo
+- variant=cpow
+- strategy.d=20
+- strategy.ck=9

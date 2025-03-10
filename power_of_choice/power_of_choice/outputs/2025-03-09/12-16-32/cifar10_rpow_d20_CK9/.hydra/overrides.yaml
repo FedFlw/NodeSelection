@@ -1,0 +1,4 @@
+- optimizer=so
+- variant=rpow
+- strategy.d=20
+- strategy.ck=9

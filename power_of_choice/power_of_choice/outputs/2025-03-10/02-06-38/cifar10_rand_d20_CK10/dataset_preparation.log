@@ -1,0 +1,6 @@
+[2025-03-10 02:06:39,570][tensorflow][WARNING] - From /Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/dataset_preparation.py:563: save (from tensorflow.python.data.experimental.ops.io) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.data.Dataset.save(...)` instead.
+[2025-03-10 02:06:40,671][tensorflow][WARNING] - From /Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/dataset_preparation.py:567: load (from tensorflow.python.data.experimental.ops.io) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.data.Dataset.load(...)` instead.
