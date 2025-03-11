@@ -111,6 +111,8 @@ class FlwrClient(fl.client.NumPyClient):
                 # In the cpow variant, during the first phase we evaluate
                 # on a mini-batch of b samples
                 b = config["b"]
+                if b > len(x_entire):
+                    b = len(x_entire)
                 idx = np.random.choice(len(x_entire), b, replace=False)
                 x_entire_selected = x_entire[idx]
                 y_entire_selected = y_entire[idx]
