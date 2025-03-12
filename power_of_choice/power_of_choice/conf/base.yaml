@@ -28,7 +28,7 @@ fraction_samples_varying: false # whether to vary fraction of samples
 comp_time: 5 # computation time in seconds for each client
 
 seed: 85
-alpha: 100
+alpha: 0.5
 is_cnn: True
 
 client_resources:

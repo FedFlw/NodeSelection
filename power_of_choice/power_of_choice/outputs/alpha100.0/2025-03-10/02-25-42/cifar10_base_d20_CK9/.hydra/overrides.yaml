@@ -1,0 +1,5 @@
+- optimizer=so
+- variant=base
+- seed=719
+- strategy.d=20
+- strategy.ck=9

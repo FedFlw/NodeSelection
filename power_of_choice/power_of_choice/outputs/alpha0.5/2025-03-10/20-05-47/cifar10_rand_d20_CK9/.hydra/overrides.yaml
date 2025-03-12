@@ -1,0 +1,5 @@
+- optimizer=rt
+- variant=rand
+- seed=85
+- strategy.d=20
+- strategy.ck=9

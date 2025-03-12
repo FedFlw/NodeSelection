@@ -1,0 +1,5 @@
+- optimizer=uo
+- variant=rpow
+- seed=85
+- strategy.d=20
+- strategy.ck=9

@@ -1,0 +1,1337 @@
+[2025-03-11 19:41:01,882][flwr][INFO] - Starting Flower simulation, config: ServerConfig(num_rounds=20, round_timeout=None)
+[2025-03-11 19:41:02,997][flwr][INFO] - Flower VCE: Ray initialized with resources: {'object_store_memory': 2147483648.0, 'memory': 16229736448.0, 'node:127.0.0.1': 1.0, 'CPU': 8.0, 'node:__internal_head__': 1.0}
+[2025-03-11 19:41:02,997][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 0.5, 'num_gpus': 0}
+[2025-03-11 19:41:03,004][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 16 actors
+[2025-03-11 19:41:03,004][flwr][INFO] - Initializing global parameters
+[2025-03-11 19:41:03,004][flwr][INFO] - Requesting initial parameters from one random client
+[2025-03-11 19:41:08,065][flwr][INFO] - Received initial parameters from one random client
+[2025-03-11 19:41:08,065][flwr][INFO] - Evaluating initial parameters
+[2025-03-11 19:41:09,157][flwr][INFO] - initial parameters (loss, other metrics): 2.3055973052978516, {'accuracy': 0.09809999912977219}
+[2025-03-11 19:41:09,157][flwr][INFO] - FL starting
+[2025-03-11 19:41:11,860][flwr][INFO] - Server 1: selected clients
+                ['5', '6', '3', '0', '8', '4', '2', '1', '7', '9'] for first phase evaluation.
+[2025-03-11 19:41:11,860][flwr][DEBUG] - evaluate_first_phase 1: strategy sampled 10 clients (out of 10)
+[2025-03-11 19:41:12,217][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 19:41:12,220][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 19:41:13,693][flwr][DEBUG] - evaluate_first_phase of round 1 received 9 results and 1 failures
+[2025-03-11 19:41:13,693][flwr][INFO] - Server 1: about to sample 9 clients
+[2025-03-11 19:41:13,693][flwr][INFO] - Round 1: selected clients
+            ['8', '7', '2', '1', '9', '5', '3', '4', '0'] for fit.
+[2025-03-11 19:41:13,693][flwr][DEBUG] - fit_round 1: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:42:10,624][flwr][DEBUG] - fit_round 1 received 9 results and 0 failures
+[2025-03-11 19:42:11,635][flwr][INFO] - fit progress: (1, 2.21697735786438, {'accuracy': 0.1868000030517578}, 62.477853666990995)
+[2025-03-11 19:42:11,635][flwr][DEBUG] - evaluate_round 1: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:42:13,427][flwr][DEBUG] - evaluate_round 1 received 9 results and 0 failures
+[2025-03-11 19:42:13,427][flwr][WARNING] - No evaluate_metrics_aggregation_fn provided
+[2025-03-11 19:42:16,202][flwr][INFO] - Server 2: selected clients
+                ['4', '8', '1', '9', '3', '5', '7', '0', '2', '6'] for first phase evaluation.
+[2025-03-11 19:42:16,202][flwr][DEBUG] - evaluate_first_phase 2: strategy sampled 10 clients (out of 10)
+[2025-03-11 19:42:16,375][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 19:42:16,378][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 19:42:17,862][flwr][DEBUG] - evaluate_first_phase of round 2 received 9 results and 1 failures
+[2025-03-11 19:42:17,862][flwr][INFO] - Server 2: about to sample 9 clients
+[2025-03-11 19:42:17,862][flwr][INFO] - Round 2: selected clients
+            ['3', '2', '1', '0', '8', '4', '9', '7', '5'] for fit.
+[2025-03-11 19:42:17,862][flwr][DEBUG] - fit_round 2: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:43:15,922][flwr][DEBUG] - fit_round 2 received 9 results and 0 failures
+[2025-03-11 19:43:16,932][flwr][INFO] - fit progress: (2, 1.8340070247650146, {'accuracy': 0.3361999988555908}, 127.77486079197843)
+[2025-03-11 19:43:16,932][flwr][DEBUG] - evaluate_round 2: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:43:18,714][flwr][DEBUG] - evaluate_round 2 received 9 results and 0 failures
+[2025-03-11 19:43:21,517][flwr][INFO] - Server 3: selected clients
+                ['2', '0', '8', '7', '4', '9', '3', '6', '1', '5'] for first phase evaluation.
+[2025-03-11 19:43:21,517][flwr][DEBUG] - evaluate_first_phase 3: strategy sampled 10 clients (out of 10)
+[2025-03-11 19:43:21,758][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28087, ip=127.0.0.1, actor_id=1ebea6919ee8d56c4b00e1db01000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x142e80b20>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28087, ip=127.0.0.1, actor_id=1ebea6919ee8d56c4b00e1db01000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x142e80b20>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 19:43:21,760][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28087, ip=127.0.0.1, actor_id=1ebea6919ee8d56c4b00e1db01000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x142e80b20>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28087, ip=127.0.0.1, actor_id=1ebea6919ee8d56c4b00e1db01000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x142e80b20>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 19:43:23,239][flwr][DEBUG] - evaluate_first_phase of round 3 received 9 results and 1 failures
+[2025-03-11 19:43:23,239][flwr][INFO] - Server 3: about to sample 9 clients
+[2025-03-11 19:43:23,239][flwr][INFO] - Round 3: selected clients
+            ['2', '4', '8', '1', '5', '0', '7', '3', '9'] for fit.
+[2025-03-11 19:43:23,239][flwr][DEBUG] - fit_round 3: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:44:20,204][flwr][DEBUG] - fit_round 3 received 9 results and 0 failures
+[2025-03-11 19:44:21,208][flwr][INFO] - fit progress: (3, 1.647196888923645, {'accuracy': 0.3806000053882599}, 192.0501162080327)
+[2025-03-11 19:44:21,208][flwr][DEBUG] - evaluate_round 3: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:44:23,025][flwr][DEBUG] - evaluate_round 3 received 9 results and 0 failures
+[2025-03-11 19:44:25,823][flwr][INFO] - Server 4: selected clients
+                ['9', '6', '0', '3', '7', '4', '2', '1', '8', '5'] for first phase evaluation.
+[2025-03-11 19:44:25,823][flwr][DEBUG] - evaluate_first_phase 4: strategy sampled 10 clients (out of 10)
+[2025-03-11 19:44:25,946][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28095, ip=127.0.0.1, actor_id=ed496f57f88a6d29b9d1d70301000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x13787caf0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28095, ip=127.0.0.1, actor_id=ed496f57f88a6d29b9d1d70301000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x13787caf0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 19:44:25,949][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28095, ip=127.0.0.1, actor_id=ed496f57f88a6d29b9d1d70301000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x13787caf0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28095, ip=127.0.0.1, actor_id=ed496f57f88a6d29b9d1d70301000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x13787caf0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 19:44:27,535][flwr][DEBUG] - evaluate_first_phase of round 4 received 9 results and 1 failures
+[2025-03-11 19:44:27,536][flwr][INFO] - Server 4: about to sample 9 clients
+[2025-03-11 19:44:27,536][flwr][INFO] - Round 4: selected clients
+            ['8', '4', '7', '1', '2', '9', '0', '3', '5'] for fit.
+[2025-03-11 19:44:27,536][flwr][DEBUG] - fit_round 4: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:45:24,352][flwr][DEBUG] - fit_round 4 received 9 results and 0 failures
+[2025-03-11 19:45:25,372][flwr][INFO] - fit progress: (4, 1.5457814931869507, {'accuracy': 0.414900004863739}, 256.2141579580493)
+[2025-03-11 19:45:25,372][flwr][DEBUG] - evaluate_round 4: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:45:27,180][flwr][DEBUG] - evaluate_round 4 received 9 results and 0 failures
+[2025-03-11 19:45:29,972][flwr][INFO] - Server 5: selected clients
+                ['9', '0', '4', '8', '6', '2', '5', '7', '1', '3'] for first phase evaluation.
+[2025-03-11 19:45:29,972][flwr][DEBUG] - evaluate_first_phase 5: strategy sampled 10 clients (out of 10)
+[2025-03-11 19:45:30,106][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28092, ip=127.0.0.1, actor_id=20a3b295cc6caf8dfc80fdf901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165d80be0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28092, ip=127.0.0.1, actor_id=20a3b295cc6caf8dfc80fdf901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165d80be0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 19:45:30,108][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28092, ip=127.0.0.1, actor_id=20a3b295cc6caf8dfc80fdf901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165d80be0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28092, ip=127.0.0.1, actor_id=20a3b295cc6caf8dfc80fdf901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165d80be0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 19:45:31,667][flwr][DEBUG] - evaluate_first_phase of round 5 received 9 results and 1 failures
+[2025-03-11 19:45:31,667][flwr][INFO] - Server 5: about to sample 9 clients
+[2025-03-11 19:45:31,668][flwr][INFO] - Round 5: selected clients
+            ['1', '4', '5', '0', '9', '3', '7', '8', '2'] for fit.
+[2025-03-11 19:45:31,668][flwr][DEBUG] - fit_round 5: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:46:28,740][flwr][DEBUG] - fit_round 5 received 9 results and 0 failures
+[2025-03-11 19:46:29,769][flwr][INFO] - fit progress: (5, 1.6682223081588745, {'accuracy': 0.40400001406669617}, 320.61082862503827)
+[2025-03-11 19:46:29,769][flwr][DEBUG] - evaluate_round 5: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:46:31,571][flwr][DEBUG] - evaluate_round 5 received 9 results and 0 failures
+[2025-03-11 19:46:34,370][flwr][INFO] - Server 6: selected clients
+                ['4', '3', '6', '5', '8', '1', '7', '0', '2', '9'] for first phase evaluation.
+[2025-03-11 19:46:34,370][flwr][DEBUG] - evaluate_first_phase 6: strategy sampled 10 clients (out of 10)
+[2025-03-11 19:46:34,517][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28093, ip=127.0.0.1, actor_id=4e08f11ce9a2a9906b6789f501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165b80a90>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28093, ip=127.0.0.1, actor_id=4e08f11ce9a2a9906b6789f501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165b80a90>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 19:46:34,519][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28093, ip=127.0.0.1, actor_id=4e08f11ce9a2a9906b6789f501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165b80a90>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28093, ip=127.0.0.1, actor_id=4e08f11ce9a2a9906b6789f501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165b80a90>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 19:46:36,023][flwr][DEBUG] - evaluate_first_phase of round 6 received 9 results and 1 failures
+[2025-03-11 19:46:36,023][flwr][INFO] - Server 6: about to sample 9 clients
+[2025-03-11 19:46:36,023][flwr][INFO] - Round 6: selected clients
+            ['1', '0', '7', '5', '4', '8', '2', '9', '3'] for fit.
+[2025-03-11 19:46:36,024][flwr][DEBUG] - fit_round 6: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:47:33,573][flwr][DEBUG] - fit_round 6 received 9 results and 0 failures
+[2025-03-11 19:47:34,587][flwr][INFO] - fit progress: (6, 1.5110570192337036, {'accuracy': 0.44519999623298645}, 385.4292019580025)
+[2025-03-11 19:47:34,587][flwr][DEBUG] - evaluate_round 6: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:47:36,417][flwr][DEBUG] - evaluate_round 6 received 9 results and 0 failures
+[2025-03-11 19:47:39,212][flwr][INFO] - Server 7: selected clients
+                ['5', '4', '0', '7', '3', '9', '2', '8', '1', '6'] for first phase evaluation.
+[2025-03-11 19:47:39,212][flwr][DEBUG] - evaluate_first_phase 7: strategy sampled 10 clients (out of 10)
+[2025-03-11 19:47:39,358][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28093, ip=127.0.0.1, actor_id=4e08f11ce9a2a9906b6789f501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165b80a90>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28093, ip=127.0.0.1, actor_id=4e08f11ce9a2a9906b6789f501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165b80a90>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 19:47:39,360][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28093, ip=127.0.0.1, actor_id=4e08f11ce9a2a9906b6789f501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165b80a90>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28093, ip=127.0.0.1, actor_id=4e08f11ce9a2a9906b6789f501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165b80a90>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 19:47:41,069][flwr][DEBUG] - evaluate_first_phase of round 7 received 9 results and 1 failures
+[2025-03-11 19:47:41,070][flwr][INFO] - Server 7: about to sample 9 clients
+[2025-03-11 19:47:41,070][flwr][INFO] - Round 7: selected clients
+            ['0', '3', '8', '5', '4', '1', '9', '7', '2'] for fit.
+[2025-03-11 19:47:41,070][flwr][DEBUG] - fit_round 7: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:48:38,521][flwr][DEBUG] - fit_round 7 received 9 results and 0 failures
+[2025-03-11 19:48:39,587][flwr][INFO] - fit progress: (7, 1.5885661840438843, {'accuracy': 0.4293000102043152}, 450.4308053329587)
+[2025-03-11 19:48:39,587][flwr][DEBUG] - evaluate_round 7: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:48:41,474][flwr][DEBUG] - evaluate_round 7 received 9 results and 0 failures
+[2025-03-11 19:48:44,208][flwr][INFO] - Server 8: selected clients
+                ['3', '0', '9', '4', '5', '8', '2', '6', '1', '7'] for first phase evaluation.
+[2025-03-11 19:48:44,208][flwr][DEBUG] - evaluate_first_phase 8: strategy sampled 10 clients (out of 10)
+[2025-03-11 19:48:44,489][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 19:48:44,491][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 19:48:45,970][flwr][DEBUG] - evaluate_first_phase of round 8 received 9 results and 1 failures
+[2025-03-11 19:48:45,971][flwr][INFO] - Server 8: about to sample 9 clients
+[2025-03-11 19:48:45,971][flwr][INFO] - Round 8: selected clients
+            ['2', '0', '3', '8', '4', '9', '1', '7', '5'] for fit.
+[2025-03-11 19:48:45,971][flwr][DEBUG] - fit_round 8: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:49:46,393][flwr][DEBUG] - fit_round 8 received 9 results and 0 failures
+[2025-03-11 19:49:47,447][flwr][INFO] - fit progress: (8, 1.3147553205490112, {'accuracy': 0.5153999924659729}, 518.3094101670431)
+[2025-03-11 19:49:47,447][flwr][DEBUG] - evaluate_round 8: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:49:49,406][flwr][DEBUG] - evaluate_round 8 received 9 results and 0 failures
+[2025-03-11 19:49:52,141][flwr][INFO] - Server 9: selected clients
+                ['5', '2', '1', '4', '7', '8', '6', '0', '9', '3'] for first phase evaluation.
+[2025-03-11 19:49:52,141][flwr][DEBUG] - evaluate_first_phase 9: strategy sampled 10 clients (out of 10)
+[2025-03-11 19:49:52,327][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28092, ip=127.0.0.1, actor_id=20a3b295cc6caf8dfc80fdf901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165d80be0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28092, ip=127.0.0.1, actor_id=20a3b295cc6caf8dfc80fdf901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165d80be0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 19:49:52,329][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28092, ip=127.0.0.1, actor_id=20a3b295cc6caf8dfc80fdf901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165d80be0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28092, ip=127.0.0.1, actor_id=20a3b295cc6caf8dfc80fdf901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165d80be0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 19:49:53,883][flwr][DEBUG] - evaluate_first_phase of round 9 received 9 results and 1 failures
+[2025-03-11 19:49:53,884][flwr][INFO] - Server 9: about to sample 9 clients
+[2025-03-11 19:49:53,884][flwr][INFO] - Round 9: selected clients
+            ['5', '7', '9', '2', '3', '4', '8', '0', '1'] for fit.
+[2025-03-11 19:49:53,884][flwr][DEBUG] - fit_round 9: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:50:54,158][flwr][DEBUG] - fit_round 9 received 9 results and 0 failures
+[2025-03-11 19:50:55,215][flwr][INFO] - fit progress: (9, 1.5264030694961548, {'accuracy': 0.44279998540878296}, 586.0774364579702)
+[2025-03-11 19:50:55,215][flwr][DEBUG] - evaluate_round 9: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:50:57,089][flwr][DEBUG] - evaluate_round 9 received 9 results and 0 failures
+[2025-03-11 19:50:59,889][flwr][INFO] - Server 10: selected clients
+                ['3', '9', '0', '6', '2', '4', '7', '5', '8', '1'] for first phase evaluation.
+[2025-03-11 19:50:59,889][flwr][DEBUG] - evaluate_first_phase 10: strategy sampled 10 clients (out of 10)
+[2025-03-11 19:51:00,041][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28090, ip=127.0.0.1, actor_id=b888f745d2b91415722d76a101000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x144d3cb20>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28090, ip=127.0.0.1, actor_id=b888f745d2b91415722d76a101000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x144d3cb20>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 19:51:00,044][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28090, ip=127.0.0.1, actor_id=b888f745d2b91415722d76a101000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x144d3cb20>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28090, ip=127.0.0.1, actor_id=b888f745d2b91415722d76a101000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x144d3cb20>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 19:51:01,697][flwr][DEBUG] - evaluate_first_phase of round 10 received 9 results and 1 failures
+[2025-03-11 19:51:01,697][flwr][INFO] - Server 10: about to sample 9 clients
+[2025-03-11 19:51:01,697][flwr][INFO] - Round 10: selected clients
+            ['7', '4', '1', '9', '3', '2', '0', '5', '8'] for fit.
+[2025-03-11 19:51:01,698][flwr][DEBUG] - fit_round 10: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:52:01,805][flwr][DEBUG] - fit_round 10 received 9 results and 0 failures
+[2025-03-11 19:52:02,853][flwr][INFO] - fit progress: (10, 1.5163871049880981, {'accuracy': 0.4478999972343445}, 653.7162641249597)
+[2025-03-11 19:52:02,853][flwr][DEBUG] - evaluate_round 10: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:52:04,728][flwr][DEBUG] - evaluate_round 10 received 9 results and 0 failures
+[2025-03-11 19:52:07,541][flwr][INFO] - Server 11: selected clients
+                ['8', '7', '1', '5', '0', '3', '6', '2', '4', '9'] for first phase evaluation.
+[2025-03-11 19:52:07,541][flwr][DEBUG] - evaluate_first_phase 11: strategy sampled 10 clients (out of 10)
+[2025-03-11 19:52:07,821][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 19:52:07,823][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 19:52:09,274][flwr][DEBUG] - evaluate_first_phase of round 11 received 9 results and 1 failures
+[2025-03-11 19:52:09,274][flwr][INFO] - Server 11: about to sample 9 clients
+[2025-03-11 19:52:09,275][flwr][INFO] - Round 11: selected clients
+            ['3', '5', '7', '4', '1', '0', '9', '2', '8'] for fit.
+[2025-03-11 19:52:09,275][flwr][DEBUG] - fit_round 11: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:53:10,200][flwr][DEBUG] - fit_round 11 received 9 results and 0 failures
+[2025-03-11 19:53:11,269][flwr][INFO] - fit progress: (11, 1.3232367038726807, {'accuracy': 0.49149999022483826}, 722.1325612079818)
+[2025-03-11 19:53:11,269][flwr][DEBUG] - evaluate_round 11: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:53:13,172][flwr][DEBUG] - evaluate_round 11 received 9 results and 0 failures
+[2025-03-11 19:53:15,920][flwr][INFO] - Server 12: selected clients
+                ['7', '5', '3', '8', '0', '4', '2', '6', '9', '1'] for first phase evaluation.
+[2025-03-11 19:53:15,920][flwr][DEBUG] - evaluate_first_phase 12: strategy sampled 10 clients (out of 10)
+[2025-03-11 19:53:16,138][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28084, ip=127.0.0.1, actor_id=d9da44ac0e15a7cf7ad6fd1601000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165980b80>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28084, ip=127.0.0.1, actor_id=d9da44ac0e15a7cf7ad6fd1601000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165980b80>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 19:53:16,152][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28084, ip=127.0.0.1, actor_id=d9da44ac0e15a7cf7ad6fd1601000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165980b80>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28084, ip=127.0.0.1, actor_id=d9da44ac0e15a7cf7ad6fd1601000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165980b80>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 19:53:17,673][flwr][DEBUG] - evaluate_first_phase of round 12 received 9 results and 1 failures
+[2025-03-11 19:53:17,673][flwr][INFO] - Server 12: about to sample 9 clients
+[2025-03-11 19:53:17,673][flwr][INFO] - Round 12: selected clients
+            ['7', '1', '4', '0', '5', '3', '9', '8', '2'] for fit.
+[2025-03-11 19:53:17,674][flwr][DEBUG] - fit_round 12: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:54:18,050][flwr][DEBUG] - fit_round 12 received 9 results and 0 failures
+[2025-03-11 19:54:19,137][flwr][INFO] - fit progress: (12, 1.222572684288025, {'accuracy': 0.534600019454956}, 790.0000761669362)
+[2025-03-11 19:54:19,137][flwr][DEBUG] - evaluate_round 12: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:54:21,015][flwr][DEBUG] - evaluate_round 12 received 9 results and 0 failures
+[2025-03-11 19:54:23,834][flwr][INFO] - Server 13: selected clients
+                ['9', '7', '4', '8', '5', '1', '0', '6', '2', '3'] for first phase evaluation.
+[2025-03-11 19:54:23,834][flwr][DEBUG] - evaluate_first_phase 13: strategy sampled 10 clients (out of 10)
+[2025-03-11 19:54:24,037][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28096, ip=127.0.0.1, actor_id=4ae54f1fe9df3ff77661e33001000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x132480bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28096, ip=127.0.0.1, actor_id=4ae54f1fe9df3ff77661e33001000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x132480bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 19:54:24,039][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28096, ip=127.0.0.1, actor_id=4ae54f1fe9df3ff77661e33001000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x132480bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28096, ip=127.0.0.1, actor_id=4ae54f1fe9df3ff77661e33001000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x132480bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 19:54:25,584][flwr][DEBUG] - evaluate_first_phase of round 13 received 9 results and 1 failures
+[2025-03-11 19:54:25,584][flwr][INFO] - Server 13: about to sample 9 clients
+[2025-03-11 19:54:25,584][flwr][INFO] - Round 13: selected clients
+            ['7', '1', '4', '3', '2', '8', '0', '5', '9'] for fit.
+[2025-03-11 19:54:25,584][flwr][DEBUG] - fit_round 13: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:55:26,416][flwr][DEBUG] - fit_round 13 received 9 results and 0 failures
+[2025-03-11 19:55:27,483][flwr][INFO] - fit progress: (13, 1.5208536386489868, {'accuracy': 0.43700000643730164}, 858.3470021670219)
+[2025-03-11 19:55:27,483][flwr][DEBUG] - evaluate_round 13: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:55:29,428][flwr][DEBUG] - evaluate_round 13 received 9 results and 0 failures
+[2025-03-11 19:55:32,241][flwr][INFO] - Server 14: selected clients
+                ['9', '4', '5', '1', '8', '2', '0', '3', '6', '7'] for first phase evaluation.
+[2025-03-11 19:55:32,241][flwr][DEBUG] - evaluate_first_phase 14: strategy sampled 10 clients (out of 10)
+[2025-03-11 19:55:32,444][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 19:55:32,447][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 19:55:33,975][flwr][DEBUG] - evaluate_first_phase of round 14 received 9 results and 1 failures
+[2025-03-11 19:55:33,976][flwr][INFO] - Server 14: about to sample 9 clients
+[2025-03-11 19:55:33,976][flwr][INFO] - Round 14: selected clients
+            ['7', '0', '1', '9', '4', '8', '5', '2', '3'] for fit.
+[2025-03-11 19:55:33,976][flwr][DEBUG] - fit_round 14: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:56:34,609][flwr][DEBUG] - fit_round 14 received 9 results and 0 failures
+[2025-03-11 19:56:35,641][flwr][INFO] - fit progress: (14, 1.3337980508804321, {'accuracy': 0.506600022315979}, 926.5049290000461)
+[2025-03-11 19:56:35,641][flwr][DEBUG] - evaluate_round 14: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:56:37,539][flwr][DEBUG] - evaluate_round 14 received 9 results and 0 failures
+[2025-03-11 19:56:40,288][flwr][INFO] - Server 15: selected clients
+                ['4', '1', '7', '3', '9', '0', '5', '8', '6', '2'] for first phase evaluation.
+[2025-03-11 19:56:40,288][flwr][DEBUG] - evaluate_first_phase 15: strategy sampled 10 clients (out of 10)
+[2025-03-11 19:56:40,566][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28084, ip=127.0.0.1, actor_id=d9da44ac0e15a7cf7ad6fd1601000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165980b80>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28084, ip=127.0.0.1, actor_id=d9da44ac0e15a7cf7ad6fd1601000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165980b80>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 19:56:40,568][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28084, ip=127.0.0.1, actor_id=d9da44ac0e15a7cf7ad6fd1601000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165980b80>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28084, ip=127.0.0.1, actor_id=d9da44ac0e15a7cf7ad6fd1601000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165980b80>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 19:56:42,035][flwr][DEBUG] - evaluate_first_phase of round 15 received 9 results and 1 failures
+[2025-03-11 19:56:42,035][flwr][INFO] - Server 15: about to sample 9 clients
+[2025-03-11 19:56:42,035][flwr][INFO] - Round 15: selected clients
+            ['2', '4', '1', '0', '5', '3', '9', '7', '8'] for fit.
+[2025-03-11 19:56:42,035][flwr][DEBUG] - fit_round 15: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:57:42,427][flwr][DEBUG] - fit_round 15 received 9 results and 0 failures
+[2025-03-11 19:57:43,476][flwr][INFO] - fit progress: (15, 1.2461013793945312, {'accuracy': 0.5296000242233276}, 994.3404461250175)
+[2025-03-11 19:57:43,476][flwr][DEBUG] - evaluate_round 15: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:57:45,384][flwr][DEBUG] - evaluate_round 15 received 9 results and 0 failures
+[2025-03-11 19:57:48,188][flwr][INFO] - Server 16: selected clients
+                ['2', '0', '4', '8', '9', '7', '1', '3', '6', '5'] for first phase evaluation.
+[2025-03-11 19:57:48,188][flwr][DEBUG] - evaluate_first_phase 16: strategy sampled 10 clients (out of 10)
+[2025-03-11 19:57:48,357][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28095, ip=127.0.0.1, actor_id=ed496f57f88a6d29b9d1d70301000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x13787caf0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28095, ip=127.0.0.1, actor_id=ed496f57f88a6d29b9d1d70301000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x13787caf0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 19:57:48,359][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28095, ip=127.0.0.1, actor_id=ed496f57f88a6d29b9d1d70301000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x13787caf0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28095, ip=127.0.0.1, actor_id=ed496f57f88a6d29b9d1d70301000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x13787caf0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 19:57:49,893][flwr][DEBUG] - evaluate_first_phase of round 16 received 9 results and 1 failures
+[2025-03-11 19:57:49,894][flwr][INFO] - Server 16: about to sample 9 clients
+[2025-03-11 19:57:49,894][flwr][INFO] - Round 16: selected clients
+            ['7', '1', '4', '5', '0', '2', '8', '3', '9'] for fit.
+[2025-03-11 19:57:49,894][flwr][DEBUG] - fit_round 16: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:58:51,005][flwr][DEBUG] - fit_round 16 received 9 results and 0 failures
+[2025-03-11 19:58:52,061][flwr][INFO] - fit progress: (16, 1.2301393747329712, {'accuracy': 0.5447999835014343}, 1062.9259971670108)
+[2025-03-11 19:58:52,062][flwr][DEBUG] - evaluate_round 16: strategy sampled 9 clients (out of 10)
+[2025-03-11 19:58:53,972][flwr][DEBUG] - evaluate_round 16 received 9 results and 0 failures
+[2025-03-11 19:58:56,808][flwr][INFO] - Server 17: selected clients
+                ['4', '3', '6', '7', '9', '1', '0', '2', '5', '8'] for first phase evaluation.
+[2025-03-11 19:58:56,808][flwr][DEBUG] - evaluate_first_phase 17: strategy sampled 10 clients (out of 10)
+[2025-03-11 19:58:56,947][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28094, ip=127.0.0.1, actor_id=42f41f0ff3a426e40f093c6501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x13bf80b50>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28094, ip=127.0.0.1, actor_id=42f41f0ff3a426e40f093c6501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x13bf80b50>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 19:58:56,950][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28094, ip=127.0.0.1, actor_id=42f41f0ff3a426e40f093c6501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x13bf80b50>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28094, ip=127.0.0.1, actor_id=42f41f0ff3a426e40f093c6501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x13bf80b50>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 19:58:58,681][flwr][DEBUG] - evaluate_first_phase of round 17 received 9 results and 1 failures
+[2025-03-11 19:58:58,681][flwr][INFO] - Server 17: about to sample 9 clients
+[2025-03-11 19:58:58,681][flwr][INFO] - Round 17: selected clients
+            ['1', '4', '7', '9', '8', '0', '3', '2', '5'] for fit.
+[2025-03-11 19:58:58,682][flwr][DEBUG] - fit_round 17: strategy sampled 9 clients (out of 10)
+[2025-03-11 20:00:00,519][flwr][DEBUG] - fit_round 17 received 9 results and 0 failures
+[2025-03-11 20:00:01,571][flwr][INFO] - fit progress: (17, 1.1495863199234009, {'accuracy': 0.5637999773025513}, 1132.436219541938)
+[2025-03-11 20:00:01,572][flwr][DEBUG] - evaluate_round 17: strategy sampled 9 clients (out of 10)
+[2025-03-11 20:00:03,521][flwr][DEBUG] - evaluate_round 17 received 9 results and 0 failures
+[2025-03-11 20:00:06,276][flwr][INFO] - Server 18: selected clients
+                ['3', '8', '5', '6', '2', '0', '1', '9', '7', '4'] for first phase evaluation.
+[2025-03-11 20:00:06,276][flwr][DEBUG] - evaluate_first_phase 18: strategy sampled 10 clients (out of 10)
+[2025-03-11 20:00:06,554][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28093, ip=127.0.0.1, actor_id=4e08f11ce9a2a9906b6789f501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165b80a90>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28093, ip=127.0.0.1, actor_id=4e08f11ce9a2a9906b6789f501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165b80a90>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 20:00:06,556][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28093, ip=127.0.0.1, actor_id=4e08f11ce9a2a9906b6789f501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165b80a90>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28093, ip=127.0.0.1, actor_id=4e08f11ce9a2a9906b6789f501000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165b80a90>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 20:00:08,002][flwr][DEBUG] - evaluate_first_phase of round 18 received 9 results and 1 failures
+[2025-03-11 20:00:08,003][flwr][INFO] - Server 18: about to sample 9 clients
+[2025-03-11 20:00:08,003][flwr][INFO] - Round 18: selected clients
+            ['2', '8', '1', '9', '7', '5', '4', '3', '0'] for fit.
+[2025-03-11 20:00:08,003][flwr][DEBUG] - fit_round 18: strategy sampled 9 clients (out of 10)
+[2025-03-11 20:01:09,421][flwr][DEBUG] - fit_round 18 received 9 results and 0 failures
+[2025-03-11 20:01:10,464][flwr][INFO] - fit progress: (18, 1.1525145769119263, {'accuracy': 0.5591999888420105}, 1201.3293632499408)
+[2025-03-11 20:01:10,464][flwr][DEBUG] - evaluate_round 18: strategy sampled 9 clients (out of 10)
+[2025-03-11 20:01:12,383][flwr][DEBUG] - evaluate_round 18 received 9 results and 0 failures
+[2025-03-11 20:01:15,204][flwr][INFO] - Server 19: selected clients
+                ['1', '7', '0', '8', '5', '6', '3', '9', '2', '4'] for first phase evaluation.
+[2025-03-11 20:01:15,205][flwr][DEBUG] - evaluate_first_phase 19: strategy sampled 10 clients (out of 10)
+[2025-03-11 20:01:15,341][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 20:01:15,343][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28091, ip=127.0.0.1, actor_id=09b4b567bc21b3011ee29f5901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x139a80bb0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 20:01:17,143][flwr][DEBUG] - evaluate_first_phase of round 19 received 9 results and 1 failures
+[2025-03-11 20:01:17,143][flwr][INFO] - Server 19: about to sample 9 clients
+[2025-03-11 20:01:17,143][flwr][INFO] - Round 19: selected clients
+            ['7', '9', '0', '1', '4', '2', '8', '5', '3'] for fit.
+[2025-03-11 20:01:17,143][flwr][DEBUG] - fit_round 19: strategy sampled 9 clients (out of 10)
+[2025-03-11 20:02:18,958][flwr][DEBUG] - fit_round 19 received 9 results and 0 failures
+[2025-03-11 20:02:20,025][flwr][INFO] - fit progress: (19, 1.155218482017517, {'accuracy': 0.5695000290870667}, 1270.8902786249528)
+[2025-03-11 20:02:20,025][flwr][DEBUG] - evaluate_round 19: strategy sampled 9 clients (out of 10)
+[2025-03-11 20:02:22,048][flwr][DEBUG] - evaluate_round 19 received 9 results and 0 failures
+[2025-03-11 20:02:24,787][flwr][INFO] - Server 20: selected clients
+                ['7', '0', '6', '2', '4', '3', '9', '8', '5', '1'] for first phase evaluation.
+[2025-03-11 20:02:24,787][flwr][DEBUG] - evaluate_first_phase 20: strategy sampled 10 clients (out of 10)
+[2025-03-11 20:02:24,929][flwr][ERROR] - Traceback (most recent call last):
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 140, in _submit_job
+    res = self.actor_pool.get_client_result(self.cid, timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 402, in get_client_result
+    return self._fetch_future_result(cid)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 288, in _fetch_future_result
+    res_cid, res = ray.get(future)  # type: (str, ClientRes)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 2771, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientException): [36mray::DefaultActor.run()[39m (pid=28092, ip=127.0.0.1, actor_id=20a3b295cc6caf8dfc80fdf901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165d80be0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28092, ip=127.0.0.1, actor_id=20a3b295cc6caf8dfc80fdf901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165d80be0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+
+[2025-03-11 20:02:24,931][flwr][ERROR] - [36mray::DefaultActor.run()[39m (pid=28092, ip=127.0.0.1, actor_id=20a3b295cc6caf8dfc80fdf901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165d80be0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate
+    return maybe_call_evaluate(
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate
+    idx = np.random.choice(len(x_entire), b, replace=False)
+  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::DefaultActor.run()[39m (pid=28092, ip=127.0.0.1, actor_id=20a3b295cc6caf8dfc80fdf901000000, repr=<flwr.simulation.ray_transport.ray_actor.DefaultActor object at 0x165d80be0>)
+  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 72, in run
+    raise ClientException(str(message)) from ex
+flwr.simulation.ray_transport.ray_actor.ClientException: 
+>>>>>>>A ClientException occurred.('\n\tSomething went wrong when running your client workload.\n\tClient 6 crashed when the DefaultActor was running its workload.\n\tException triggered on the client side: Traceback (most recent call last):\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_actor.py", line 60, in run\n    job_results = job_fn()\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/simulation/ray_transport/ray_client_proxy.py", line 215, in evaluate\n    return maybe_call_evaluate(\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/client.py", line 237, in maybe_call_evaluate\n    return client.evaluate(evaluate_ins)\n  File "/opt/anaconda3/envs/NodeSelection/lib/python3.10/site-packages/flwr/client/app.py", line 357, in _evaluate\n    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore\n  File "/Users/livialestingi/PycharmProjects/NodeSelection/power_of_choice/power_of_choice/client_so.py", line 114, in evaluate\n    idx = np.random.choice(len(x_entire), b, replace=False)\n  File "mtrand.pyx", line 984, in numpy.random.mtrand.RandomState.choice\nValueError: Cannot take a larger sample than population when \'replace=False\'\n',)
+[2025-03-11 20:02:26,601][flwr][DEBUG] - evaluate_first_phase of round 20 received 9 results and 1 failures
+[2025-03-11 20:02:26,601][flwr][INFO] - Server 20: about to sample 9 clients
+[2025-03-11 20:02:26,601][flwr][INFO] - Round 20: selected clients
+            ['7', '3', '2', '5', '8', '1', '0', '4', '9'] for fit.
+[2025-03-11 20:02:26,601][flwr][DEBUG] - fit_round 20: strategy sampled 9 clients (out of 10)
+[2025-03-11 20:03:28,262][flwr][DEBUG] - fit_round 20 received 9 results and 0 failures
+[2025-03-11 20:03:29,320][flwr][INFO] - fit progress: (20, 1.165681004524231, {'accuracy': 0.5561000108718872}, 1340.185599957942)
+[2025-03-11 20:03:29,320][flwr][DEBUG] - evaluate_round 20: strategy sampled 9 clients (out of 10)
+[2025-03-11 20:03:31,204][flwr][DEBUG] - evaluate_round 20 received 9 results and 0 failures
+[2025-03-11 20:03:31,204][flwr][INFO] - FL finished in 1342.069229374989
+[2025-03-11 20:03:31,204][flwr][INFO] - app_fit: losses_distributed [(1, 2.199626671620451), (2, 1.7836576914920594), (3, 1.6087535792551102), (4, 1.530712052656058), (5, 1.608061371900784), (6, 1.4694844879709874), (7, 1.5387151254632603), (8, 1.2676879193264836), (9, 1.484670472911562), (10, 1.4723774283743514), (11, 1.2779284793966876), (12, 1.1745613605831378), (13, 1.4680084073886324), (14, 1.294579385211483), (15, 1.2101556810374838), (16, 1.180689452745663), (17, 1.093993320775489), (18, 1.0985224555237605), (19, 1.0971651095599413), (20, 1.1197254962671679)]
+[2025-03-11 20:03:31,204][flwr][INFO] - app_fit: metrics_distributed_fit {'variance_training_loss': [(1, 0.25108860971079083), (2, 0.21116006092950557), (3, 0.19328435703306773), (4, 0.18206701639249834), (5, 0.1703853693412095), (6, 0.16260995311331666), (7, 0.1563949512675616), (8, 0.14678139100961662), (9, 0.14220549086915665), (10, 0.14108865919742103), (11, 0.13393805309918236), (12, 0.12967392084716023), (13, 0.13309735989325), (14, 0.12785376490595798), (15, 0.12151061747571285), (16, 0.12439637997669796), (17, 0.1208883353866869), (18, 0.11331994202844392), (19, 0.11411333774527714), (20, 0.1131708174162734)], 'average_training_loss': [(1, 0.9917951558923556), (2, 0.9007065423453847), (3, 0.8465569944431385), (4, 0.8032999261178904), (5, 0.7641879413276911), (6, 0.7473953717077771), (7, 0.7145182154037886), (8, 0.6934168616102802), (9, 0.6807107988538014), (10, 0.6691016407890452), (11, 0.6489548677475088), (12, 0.6403777800603874), (13, 0.6340352862866389), (14, 0.6203825676606761), (15, 0.6098502771928906), (16, 0.6061916902868284), (17, 0.5984076130100422), (18, 0.5848767791564266), (19, 0.5858870714695917), (20, 0.5754384983124005)], 'estimated_times': [(1, [27.178697074834854, 47.85749374196459, 121.54531380128539, 28.14611948492493, 44.32094480237502, 145.22105261136792, 70.86991858523741, 73.4531853782454, 20.69146063114294]), (2, [121.54531380128539, 70.86991858523741, 28.14611948492493, 20.69146063114294, 145.22105261136792, 44.32094480237502, 47.85749374196459, 73.4531853782454, 27.178697074834854]), (3, [44.32094480237502, 70.86991858523741, 28.14611948492493, 121.54531380128539, 73.4531853782454, 47.85749374196459, 20.69146063114294, 27.178697074834854, 145.22105261136792]), (4, [73.4531853782454, 121.54531380128539, 27.178697074834854, 28.14611948492493, 47.85749374196459, 20.69146063114294, 70.86991858523741, 145.22105261136792, 44.32094480237502]), (5, [47.85749374196459, 70.86991858523741, 73.4531853782454, 145.22105261136792, 28.14611948492493, 121.54531380128539, 20.69146063114294, 27.178697074834854, 44.32094480237502]), (6, [70.86991858523741, 28.14611948492493, 73.4531853782454, 27.178697074834854, 20.69146063114294, 145.22105261136792, 47.85749374196459, 44.32094480237502, 121.54531380128539]), (7, [73.4531853782454, 44.32094480237502, 121.54531380128539, 20.69146063114294, 70.86991858523741, 47.85749374196459, 27.178697074834854, 145.22105261136792, 28.14611948492493]), (8, [73.4531853782454, 47.85749374196459, 44.32094480237502, 27.178697074834854, 121.54531380128539, 145.22105261136792, 70.86991858523741, 28.14611948492493, 20.69146063114294]), (9, [27.178697074834854, 47.85749374196459, 20.69146063114294, 70.86991858523741, 121.54531380128539, 44.32094480237502, 145.22105261136792, 73.4531853782454, 28.14611948492493]), (10, [28.14611948492493, 73.4531853782454, 121.54531380128539, 20.69146063114294, 145.22105261136792, 27.178697074834854, 44.32094480237502, 70.86991858523741, 47.85749374196459]), (11, [70.86991858523741, 28.14611948492493, 44.32094480237502, 145.22105261136792, 73.4531853782454, 27.178697074834854, 47.85749374196459, 121.54531380128539, 20.69146063114294]), (12, [70.86991858523741, 73.4531853782454, 44.32094480237502, 28.14611948492493, 145.22105261136792, 47.85749374196459, 20.69146063114294, 121.54531380128539, 27.178697074834854]), (13, [47.85749374196459, 27.178697074834854, 44.32094480237502, 121.54531380128539, 73.4531853782454, 20.69146063114294, 28.14611948492493, 145.22105261136792, 70.86991858523741]), (14, [145.22105261136792, 28.14611948492493, 27.178697074834854, 73.4531853782454, 20.69146063114294, 121.54531380128539, 70.86991858523741, 47.85749374196459, 44.32094480237502]), (15, [70.86991858523741, 47.85749374196459, 73.4531853782454, 44.32094480237502, 145.22105261136792, 20.69146063114294, 27.178697074834854, 28.14611948492493, 121.54531380128539]), (16, [28.14611948492493, 70.86991858523741, 121.54531380128539, 20.69146063114294, 27.178697074834854, 44.32094480237502, 47.85749374196459, 145.22105261136792, 73.4531853782454]), (17, [47.85749374196459, 20.69146063114294, 44.32094480237502, 121.54531380128539, 145.22105261136792, 70.86991858523741, 27.178697074834854, 73.4531853782454, 28.14611948492493]), (18, [145.22105261136792, 20.69146063114294, 47.85749374196459, 70.86991858523741, 27.178697074834854, 121.54531380128539, 44.32094480237502, 28.14611948492493, 73.4531853782454]), (19, [70.86991858523741, 47.85749374196459, 44.32094480237502, 121.54531380128539, 28.14611948492493, 145.22105261136792, 73.4531853782454, 20.69146063114294, 27.178697074834854]), (20, [73.4531853782454, 70.86991858523741, 44.32094480237502, 28.14611948492493, 145.22105261136792, 27.178697074834854, 121.54531380128539, 20.69146063114294, 47.85749374196459])]}
+[2025-03-11 20:03:31,206][flwr][INFO] - app_fit: metrics_distributed {}
+[2025-03-11 20:03:31,206][flwr][INFO] - app_fit: losses_centralized [(0, 2.3055973052978516), (1, 2.21697735786438), (2, 1.8340070247650146), (3, 1.647196888923645), (4, 1.5457814931869507), (5, 1.6682223081588745), (6, 1.5110570192337036), (7, 1.5885661840438843), (8, 1.3147553205490112), (9, 1.5264030694961548), (10, 1.5163871049880981), (11, 1.3232367038726807), (12, 1.222572684288025), (13, 1.5208536386489868), (14, 1.3337980508804321), (15, 1.2461013793945312), (16, 1.2301393747329712), (17, 1.1495863199234009), (18, 1.1525145769119263), (19, 1.155218482017517), (20, 1.165681004524231)]
+[2025-03-11 20:03:31,206][flwr][INFO] - app_fit: metrics_centralized {'accuracy': [(0, 0.09809999912977219), (1, 0.1868000030517578), (2, 0.3361999988555908), (3, 0.3806000053882599), (4, 0.414900004863739), (5, 0.40400001406669617), (6, 0.44519999623298645), (7, 0.4293000102043152), (8, 0.5153999924659729), (9, 0.44279998540878296), (10, 0.4478999972343445), (11, 0.49149999022483826), (12, 0.534600019454956), (13, 0.43700000643730164), (14, 0.506600022315979), (15, 0.5296000242233276), (16, 0.5447999835014343), (17, 0.5637999773025513), (18, 0.5591999888420105), (19, 0.5695000290870667), (20, 0.5561000108718872)]}

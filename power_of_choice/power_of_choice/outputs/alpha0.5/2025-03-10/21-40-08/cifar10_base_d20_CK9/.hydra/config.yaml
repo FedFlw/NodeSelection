@@ -1,0 +1,36 @@
+num_clients: 10
+num_rounds: 20
+batch_size: 32
+local_epochs: 4
+fraction_samples: 1.0
+epochs_min: 1
+epochs_max: 4
+batch_size_min: 32
+batch_size_max: 128
+fraction_samples_min: 0.5
+fraction_samples_max: 1.0
+local_epochs_default: 4
+batch_size_default: 32
+fraction_samples_default: 1.0
+local_epochs_varying: false
+batch_size_varying: false
+fraction_samples_varying: false
+comp_time: 5
+seed: 109
+alpha: 0.5
+is_cnn: true
+client_resources:
+  num_cpus: 0.5
+  num_gpus: 0
+optimizer: so
+dataset:
+  dataset: cifar10
+variant: base
+b: 64
+strategy:
+  _target_: strategy.PowerOfChoice
+  d: 20
+  ck: 9
+client:
+  mean_ips: 10
+  var_ips: 5

@@ -1,0 +1,257 @@
+[2025-03-10 23:56:01,275][flwr][INFO] - Starting Flower simulation, config: ServerConfig(num_rounds=20, round_timeout=None)
+[2025-03-10 23:56:02,446][flwr][INFO] - Flower VCE: Ray initialized with resources: {'memory': 17115902772.0, 'object_store_memory': 2147483648.0, 'CPU': 8.0, 'node:__internal_head__': 1.0, 'node:127.0.0.1': 1.0}
+[2025-03-10 23:56:02,446][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 0.5, 'num_gpus': 0}
+[2025-03-10 23:56:02,455][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 16 actors
+[2025-03-10 23:56:02,455][flwr][INFO] - Initializing global parameters
+[2025-03-10 23:56:02,456][flwr][INFO] - Requesting initial parameters from one random client
+[2025-03-10 23:56:07,783][flwr][INFO] - Received initial parameters from one random client
+[2025-03-10 23:56:07,783][flwr][INFO] - Evaluating initial parameters
+[2025-03-10 23:56:09,032][flwr][INFO] - initial parameters (loss, other metrics): 2.3047564029693604, {'accuracy': 0.10000000149011612}
+[2025-03-10 23:56:09,032][flwr][INFO] - FL starting
+[2025-03-10 23:56:11,846][flwr][INFO] - Server 1: selected clients
+                ['7', '8', '9', '0', '4', '1', '3', '2', '6', '5'] for first phase evaluation.
+[2025-03-10 23:56:11,846][flwr][DEBUG] - evaluate_first_phase 1: strategy sampled 10 clients (out of 10)
+[2025-03-10 23:56:13,759][flwr][DEBUG] - evaluate_first_phase of round 1 received 10 results and 0 failures
+[2025-03-10 23:56:13,759][flwr][INFO] - Server 1: about to sample 9 clients
+[2025-03-10 23:56:13,759][flwr][INFO] - Round 1: selected clients
+            ['0', '5', '9', '8', '7', '2', '6', '3', '4'] for fit.
+[2025-03-10 23:56:16,067][flwr][DEBUG] - fit_round 1: strategy sampled 9 clients (out of 10)
+[2025-03-10 23:56:50,013][flwr][DEBUG] - fit_round 1 received 9 results and 0 failures
+[2025-03-10 23:56:51,086][flwr][INFO] - fit progress: (1, 2.387078046798706, {'accuracy': 0.13089999556541443}, 42.05366845801473)
+[2025-03-10 23:56:51,087][flwr][DEBUG] - evaluate_round 1: strategy sampled 9 clients (out of 10)
+[2025-03-10 23:56:52,815][flwr][DEBUG] - evaluate_round 1 received 9 results and 0 failures
+[2025-03-10 23:56:52,815][flwr][WARNING] - No evaluate_metrics_aggregation_fn provided
+[2025-03-10 23:56:55,546][flwr][INFO] - Server 2: selected clients
+                ['3', '9', '1', '0', '6', '2', '5', '4', '7', '8'] for first phase evaluation.
+[2025-03-10 23:56:55,547][flwr][DEBUG] - evaluate_first_phase 2: strategy sampled 10 clients (out of 10)
+[2025-03-10 23:56:57,497][flwr][DEBUG] - evaluate_first_phase of round 2 received 10 results and 0 failures
+[2025-03-10 23:56:57,497][flwr][INFO] - Server 2: about to sample 9 clients
+[2025-03-10 23:56:57,497][flwr][INFO] - Round 2: selected clients
+            ['1', '8', '6', '0', '4', '9', '2', '5', '3'] for fit.
+[2025-03-10 23:57:00,113][flwr][DEBUG] - fit_round 2: strategy sampled 9 clients (out of 10)
+[2025-03-10 23:57:42,699][flwr][DEBUG] - fit_round 2 received 9 results and 0 failures
+[2025-03-10 23:57:43,750][flwr][INFO] - fit progress: (2, 1.8697803020477295, {'accuracy': 0.2842000126838684}, 94.71689129108563)
+[2025-03-10 23:57:43,751][flwr][DEBUG] - evaluate_round 2: strategy sampled 9 clients (out of 10)
+[2025-03-10 23:57:45,508][flwr][DEBUG] - evaluate_round 2 received 9 results and 0 failures
+[2025-03-10 23:57:48,286][flwr][INFO] - Server 3: selected clients
+                ['8', '0', '7', '3', '4', '1', '2', '5', '6', '9'] for first phase evaluation.
+[2025-03-10 23:57:48,286][flwr][DEBUG] - evaluate_first_phase 3: strategy sampled 10 clients (out of 10)
+[2025-03-10 23:57:50,024][flwr][DEBUG] - evaluate_first_phase of round 3 received 10 results and 0 failures
+[2025-03-10 23:57:50,024][flwr][INFO] - Server 3: about to sample 9 clients
+[2025-03-10 23:57:50,024][flwr][INFO] - Round 3: selected clients
+            ['4', '3', '6', '7', '9', '0', '2', '8', '5'] for fit.
+[2025-03-10 23:57:52,377][flwr][DEBUG] - fit_round 3: strategy sampled 9 clients (out of 10)
+[2025-03-10 23:58:26,584][flwr][DEBUG] - fit_round 3 received 9 results and 0 failures
+[2025-03-10 23:58:27,661][flwr][INFO] - fit progress: (3, 1.7171322107315063, {'accuracy': 0.3628999888896942}, 138.62720895803068)
+[2025-03-10 23:58:27,661][flwr][DEBUG] - evaluate_round 3: strategy sampled 9 clients (out of 10)
+[2025-03-10 23:58:29,355][flwr][DEBUG] - evaluate_round 3 received 9 results and 0 failures
+[2025-03-10 23:58:32,151][flwr][INFO] - Server 4: selected clients
+                ['5', '7', '2', '1', '9', '0', '6', '3', '8', '4'] for first phase evaluation.
+[2025-03-10 23:58:32,151][flwr][DEBUG] - evaluate_first_phase 4: strategy sampled 10 clients (out of 10)
+[2025-03-10 23:58:33,917][flwr][DEBUG] - evaluate_first_phase of round 4 received 10 results and 0 failures
+[2025-03-10 23:58:33,917][flwr][INFO] - Server 4: about to sample 9 clients
+[2025-03-10 23:58:33,917][flwr][INFO] - Round 4: selected clients
+            ['8', '5', '6', '0', '3', '9', '4', '1', '2'] for fit.
+[2025-03-10 23:58:36,548][flwr][DEBUG] - fit_round 4: strategy sampled 9 clients (out of 10)
+[2025-03-10 23:59:18,882][flwr][DEBUG] - fit_round 4 received 9 results and 0 failures
+[2025-03-10 23:59:19,934][flwr][INFO] - fit progress: (4, 1.7837376594543457, {'accuracy': 0.34470000863075256}, 190.89901804109104)
+[2025-03-10 23:59:19,934][flwr][DEBUG] - evaluate_round 4: strategy sampled 9 clients (out of 10)
+[2025-03-10 23:59:21,682][flwr][DEBUG] - evaluate_round 4 received 9 results and 0 failures
+[2025-03-10 23:59:24,471][flwr][INFO] - Server 5: selected clients
+                ['7', '5', '3', '6', '0', '8', '4', '1', '2', '9'] for first phase evaluation.
+[2025-03-10 23:59:24,472][flwr][DEBUG] - evaluate_first_phase 5: strategy sampled 10 clients (out of 10)
+[2025-03-10 23:59:26,299][flwr][DEBUG] - evaluate_first_phase of round 5 received 10 results and 0 failures
+[2025-03-10 23:59:26,299][flwr][INFO] - Server 5: about to sample 9 clients
+[2025-03-10 23:59:26,300][flwr][INFO] - Round 5: selected clients
+            ['5', '6', '2', '9', '8', '4', '1', '7', '0'] for fit.
+[2025-03-10 23:59:29,018][flwr][DEBUG] - fit_round 5: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:00:13,680][flwr][DEBUG] - fit_round 5 received 9 results and 0 failures
+[2025-03-11 00:00:14,777][flwr][INFO] - fit progress: (5, 1.5463581085205078, {'accuracy': 0.4325000047683716}, 245.74167704104912)
+[2025-03-11 00:00:14,778][flwr][DEBUG] - evaluate_round 5: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:00:16,693][flwr][DEBUG] - evaluate_round 5 received 9 results and 0 failures
+[2025-03-11 00:00:19,487][flwr][INFO] - Server 6: selected clients
+                ['4', '6', '2', '7', '0', '9', '1', '5', '3', '8'] for first phase evaluation.
+[2025-03-11 00:00:19,487][flwr][DEBUG] - evaluate_first_phase 6: strategy sampled 10 clients (out of 10)
+[2025-03-11 00:00:21,233][flwr][DEBUG] - evaluate_first_phase of round 6 received 10 results and 0 failures
+[2025-03-11 00:00:21,233][flwr][INFO] - Server 6: about to sample 9 clients
+[2025-03-11 00:00:21,233][flwr][INFO] - Round 6: selected clients
+            ['8', '3', '5', '4', '7', '0', '6', '9', '2'] for fit.
+[2025-03-11 00:00:23,594][flwr][DEBUG] - fit_round 6: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:00:57,691][flwr][DEBUG] - fit_round 6 received 9 results and 0 failures
+[2025-03-11 00:00:58,760][flwr][INFO] - fit progress: (6, 1.5983747243881226, {'accuracy': 0.43299999833106995}, 289.72395162505563)
+[2025-03-11 00:00:58,760][flwr][DEBUG] - evaluate_round 6: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:01:00,521][flwr][DEBUG] - evaluate_round 6 received 9 results and 0 failures
+[2025-03-11 00:01:03,337][flwr][INFO] - Server 7: selected clients
+                ['1', '8', '2', '0', '6', '7', '4', '3', '5', '9'] for first phase evaluation.
+[2025-03-11 00:01:03,338][flwr][DEBUG] - evaluate_first_phase 7: strategy sampled 10 clients (out of 10)
+[2025-03-11 00:01:05,103][flwr][DEBUG] - evaluate_first_phase of round 7 received 10 results and 0 failures
+[2025-03-11 00:01:05,103][flwr][INFO] - Server 7: about to sample 9 clients
+[2025-03-11 00:01:05,103][flwr][INFO] - Round 7: selected clients
+            ['2', '7', '6', '0', '1', '8', '9', '5', '4'] for fit.
+[2025-03-11 00:01:07,793][flwr][DEBUG] - fit_round 7: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:01:52,578][flwr][DEBUG] - fit_round 7 received 9 results and 0 failures
+[2025-03-11 00:01:53,642][flwr][INFO] - fit progress: (7, 1.4955859184265137, {'accuracy': 0.45890000462532043}, 344.604922666098)
+[2025-03-11 00:01:53,642][flwr][DEBUG] - evaluate_round 7: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:01:55,494][flwr][DEBUG] - evaluate_round 7 received 9 results and 0 failures
+[2025-03-11 00:01:58,222][flwr][INFO] - Server 8: selected clients
+                ['2', '6', '0', '7', '5', '9', '3', '8', '4', '1'] for first phase evaluation.
+[2025-03-11 00:01:58,223][flwr][DEBUG] - evaluate_first_phase 8: strategy sampled 10 clients (out of 10)
+[2025-03-11 00:01:59,964][flwr][DEBUG] - evaluate_first_phase of round 8 received 10 results and 0 failures
+[2025-03-11 00:01:59,964][flwr][INFO] - Server 8: about to sample 9 clients
+[2025-03-11 00:01:59,964][flwr][INFO] - Round 8: selected clients
+            ['6', '8', '5', '0', '3', '4', '7', '2', '9'] for fit.
+[2025-03-11 00:02:02,247][flwr][DEBUG] - fit_round 8: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:02:36,865][flwr][DEBUG] - fit_round 8 received 9 results and 0 failures
+[2025-03-11 00:02:37,931][flwr][INFO] - fit progress: (8, 1.4885482788085938, {'accuracy': 0.47110000252723694}, 388.8934460830642)
+[2025-03-11 00:02:37,931][flwr][DEBUG] - evaluate_round 8: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:02:39,561][flwr][DEBUG] - evaluate_round 8 received 9 results and 0 failures
+[2025-03-11 00:02:42,348][flwr][INFO] - Server 9: selected clients
+                ['7', '9', '1', '6', '3', '4', '2', '5', '0', '8'] for first phase evaluation.
+[2025-03-11 00:02:42,348][flwr][DEBUG] - evaluate_first_phase 9: strategy sampled 10 clients (out of 10)
+[2025-03-11 00:02:44,113][flwr][DEBUG] - evaluate_first_phase of round 9 received 10 results and 0 failures
+[2025-03-11 00:02:44,113][flwr][INFO] - Server 9: about to sample 9 clients
+[2025-03-11 00:02:44,113][flwr][INFO] - Round 9: selected clients
+            ['1', '2', '0', '3', '7', '9', '4', '6', '5'] for fit.
+[2025-03-11 00:02:46,530][flwr][DEBUG] - fit_round 9: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:03:26,563][flwr][DEBUG] - fit_round 9 received 9 results and 0 failures
+[2025-03-11 00:03:27,617][flwr][INFO] - fit progress: (9, 1.4801713228225708, {'accuracy': 0.42489999532699585}, 438.57900066603906)
+[2025-03-11 00:03:27,618][flwr][DEBUG] - evaluate_round 9: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:03:29,326][flwr][DEBUG] - evaluate_round 9 received 9 results and 0 failures
+[2025-03-11 00:03:32,065][flwr][INFO] - Server 10: selected clients
+                ['2', '4', '0', '3', '8', '6', '1', '7', '9', '5'] for first phase evaluation.
+[2025-03-11 00:03:32,066][flwr][DEBUG] - evaluate_first_phase 10: strategy sampled 10 clients (out of 10)
+[2025-03-11 00:03:33,833][flwr][DEBUG] - evaluate_first_phase of round 10 received 10 results and 0 failures
+[2025-03-11 00:03:33,833][flwr][INFO] - Server 10: about to sample 9 clients
+[2025-03-11 00:03:33,834][flwr][INFO] - Round 10: selected clients
+            ['0', '2', '9', '8', '7', '5', '6', '3', '4'] for fit.
+[2025-03-11 00:03:36,134][flwr][DEBUG] - fit_round 10: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:04:10,869][flwr][DEBUG] - fit_round 10 received 9 results and 0 failures
+[2025-03-11 00:04:11,988][flwr][INFO] - fit progress: (10, 1.531899094581604, {'accuracy': 0.4242999851703644}, 482.94892262504436)
+[2025-03-11 00:04:11,988][flwr][DEBUG] - evaluate_round 10: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:04:13,682][flwr][DEBUG] - evaluate_round 10 received 9 results and 0 failures
+[2025-03-11 00:04:16,417][flwr][INFO] - Server 11: selected clients
+                ['8', '2', '1', '4', '3', '7', '6', '0', '5', '9'] for first phase evaluation.
+[2025-03-11 00:04:16,418][flwr][DEBUG] - evaluate_first_phase 11: strategy sampled 10 clients (out of 10)
+[2025-03-11 00:04:18,279][flwr][DEBUG] - evaluate_first_phase of round 11 received 10 results and 0 failures
+[2025-03-11 00:04:18,279][flwr][INFO] - Server 11: about to sample 9 clients
+[2025-03-11 00:04:18,279][flwr][INFO] - Round 11: selected clients
+            ['0', '9', '6', '8', '2', '5', '3', '7', '4'] for fit.
+[2025-03-11 00:04:20,542][flwr][DEBUG] - fit_round 11: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:04:55,166][flwr][DEBUG] - fit_round 11 received 9 results and 0 failures
+[2025-03-11 00:04:56,241][flwr][INFO] - fit progress: (11, 1.4332270622253418, {'accuracy': 0.48019999265670776}, 527.2008890830912)
+[2025-03-11 00:04:56,241][flwr][DEBUG] - evaluate_round 11: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:04:57,902][flwr][DEBUG] - evaluate_round 11 received 9 results and 0 failures
+[2025-03-11 00:05:00,694][flwr][INFO] - Server 12: selected clients
+                ['9', '8', '1', '5', '7', '0', '6', '3', '2', '4'] for first phase evaluation.
+[2025-03-11 00:05:00,694][flwr][DEBUG] - evaluate_first_phase 12: strategy sampled 10 clients (out of 10)
+[2025-03-11 00:05:02,553][flwr][DEBUG] - evaluate_first_phase of round 12 received 10 results and 0 failures
+[2025-03-11 00:05:02,553][flwr][INFO] - Server 12: about to sample 9 clients
+[2025-03-11 00:05:02,553][flwr][INFO] - Round 12: selected clients
+            ['4', '1', '9', '5', '3', '0', '8', '7', '2'] for fit.
+[2025-03-11 00:05:04,834][flwr][DEBUG] - fit_round 12: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:05:41,054][flwr][DEBUG] - fit_round 12 received 9 results and 0 failures
+[2025-03-11 00:05:42,066][flwr][INFO] - fit progress: (12, 1.3477332592010498, {'accuracy': 0.5120000243186951}, 573.0257159580942)
+[2025-03-11 00:05:42,066][flwr][DEBUG] - evaluate_round 12: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:05:43,675][flwr][DEBUG] - evaluate_round 12 received 9 results and 0 failures
+[2025-03-11 00:05:46,406][flwr][INFO] - Server 13: selected clients
+                ['5', '9', '2', '1', '8', '7', '0', '4', '6', '3'] for first phase evaluation.
+[2025-03-11 00:05:46,407][flwr][DEBUG] - evaluate_first_phase 13: strategy sampled 10 clients (out of 10)
+[2025-03-11 00:05:48,129][flwr][DEBUG] - evaluate_first_phase of round 13 received 10 results and 0 failures
+[2025-03-11 00:05:48,129][flwr][INFO] - Server 13: about to sample 9 clients
+[2025-03-11 00:05:48,129][flwr][INFO] - Round 13: selected clients
+            ['0', '4', '8', '5', '2', '6', '9', '7', '3'] for fit.
+[2025-03-11 00:05:50,425][flwr][DEBUG] - fit_round 13: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:06:24,486][flwr][DEBUG] - fit_round 13 received 9 results and 0 failures
+[2025-03-11 00:06:25,514][flwr][INFO] - fit progress: (13, 1.3243428468704224, {'accuracy': 0.5328999757766724}, 616.473313625087)
+[2025-03-11 00:06:25,514][flwr][DEBUG] - evaluate_round 13: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:06:27,103][flwr][DEBUG] - evaluate_round 13 received 9 results and 0 failures
+[2025-03-11 00:06:29,913][flwr][INFO] - Server 14: selected clients
+                ['1', '0', '4', '8', '7', '3', '5', '6', '9', '2'] for first phase evaluation.
+[2025-03-11 00:06:29,913][flwr][DEBUG] - evaluate_first_phase 14: strategy sampled 10 clients (out of 10)
+[2025-03-11 00:06:31,780][flwr][DEBUG] - evaluate_first_phase of round 14 received 10 results and 0 failures
+[2025-03-11 00:06:31,781][flwr][INFO] - Server 14: about to sample 9 clients
+[2025-03-11 00:06:31,781][flwr][INFO] - Round 14: selected clients
+            ['6', '0', '5', '1', '9', '2', '8', '7', '4'] for fit.
+[2025-03-11 00:06:34,488][flwr][DEBUG] - fit_round 14: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:07:18,349][flwr][DEBUG] - fit_round 14 received 9 results and 0 failures
+[2025-03-11 00:07:19,384][flwr][INFO] - fit progress: (14, 1.2818011045455933, {'accuracy': 0.5310999751091003}, 670.3424635000993)
+[2025-03-11 00:07:19,384][flwr][DEBUG] - evaluate_round 14: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:07:21,227][flwr][DEBUG] - evaluate_round 14 received 9 results and 0 failures
+[2025-03-11 00:07:23,982][flwr][INFO] - Server 15: selected clients
+                ['3', '2', '4', '5', '1', '7', '6', '8', '0', '9'] for first phase evaluation.
+[2025-03-11 00:07:23,982][flwr][DEBUG] - evaluate_first_phase 15: strategy sampled 10 clients (out of 10)
+[2025-03-11 00:07:25,657][flwr][DEBUG] - evaluate_first_phase of round 15 received 10 results and 0 failures
+[2025-03-11 00:07:25,657][flwr][INFO] - Server 15: about to sample 9 clients
+[2025-03-11 00:07:25,657][flwr][INFO] - Round 15: selected clients
+            ['8', '6', '9', '2', '0', '5', '4', '3', '7'] for fit.
+[2025-03-11 00:07:27,928][flwr][DEBUG] - fit_round 15: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:08:02,561][flwr][DEBUG] - fit_round 15 received 9 results and 0 failures
+[2025-03-11 00:08:03,633][flwr][INFO] - fit progress: (15, 1.3053888082504272, {'accuracy': 0.5142999887466431}, 714.590157166007)
+[2025-03-11 00:08:03,633][flwr][DEBUG] - evaluate_round 15: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:08:05,216][flwr][DEBUG] - evaluate_round 15 received 9 results and 0 failures
+[2025-03-11 00:08:08,000][flwr][INFO] - Server 16: selected clients
+                ['8', '7', '4', '5', '2', '3', '0', '1', '9', '6'] for first phase evaluation.
+[2025-03-11 00:08:08,000][flwr][DEBUG] - evaluate_first_phase 16: strategy sampled 10 clients (out of 10)
+[2025-03-11 00:08:09,754][flwr][DEBUG] - evaluate_first_phase of round 16 received 10 results and 0 failures
+[2025-03-11 00:08:09,754][flwr][INFO] - Server 16: about to sample 9 clients
+[2025-03-11 00:08:09,754][flwr][INFO] - Round 16: selected clients
+            ['5', '4', '7', '3', '9', '1', '2', '0', '6'] for fit.
+[2025-03-11 00:08:12,163][flwr][DEBUG] - fit_round 16: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:08:52,296][flwr][DEBUG] - fit_round 16 received 9 results and 0 failures
+[2025-03-11 00:08:53,358][flwr][INFO] - fit progress: (16, 1.564728856086731, {'accuracy': 0.44830000400543213}, 764.3149193749996)
+[2025-03-11 00:08:53,358][flwr][DEBUG] - evaluate_round 16: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:08:55,186][flwr][DEBUG] - evaluate_round 16 received 9 results and 0 failures
+[2025-03-11 00:08:58,005][flwr][INFO] - Server 17: selected clients
+                ['3', '7', '2', '8', '5', '6', '4', '0', '9', '1'] for first phase evaluation.
+[2025-03-11 00:08:58,005][flwr][DEBUG] - evaluate_first_phase 17: strategy sampled 10 clients (out of 10)
+[2025-03-11 00:08:59,940][flwr][DEBUG] - evaluate_first_phase of round 17 received 10 results and 0 failures
+[2025-03-11 00:08:59,940][flwr][INFO] - Server 17: about to sample 9 clients
+[2025-03-11 00:08:59,940][flwr][INFO] - Round 17: selected clients
+            ['5', '1', '2', '6', '9', '8', '4', '7', '0'] for fit.
+[2025-03-11 00:09:02,612][flwr][DEBUG] - fit_round 17: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:09:48,187][flwr][DEBUG] - fit_round 17 received 9 results and 0 failures
+[2025-03-11 00:09:49,260][flwr][INFO] - fit progress: (17, 1.2563133239746094, {'accuracy': 0.5512999892234802}, 820.2163232500898)
+[2025-03-11 00:09:49,260][flwr][DEBUG] - evaluate_round 17: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:09:51,122][flwr][DEBUG] - evaluate_round 17 received 9 results and 0 failures
+[2025-03-11 00:09:53,926][flwr][INFO] - Server 18: selected clients
+                ['7', '4', '1', '8', '5', '6', '0', '9', '3', '2'] for first phase evaluation.
+[2025-03-11 00:09:53,926][flwr][DEBUG] - evaluate_first_phase 18: strategy sampled 10 clients (out of 10)
+[2025-03-11 00:09:55,720][flwr][DEBUG] - evaluate_first_phase of round 18 received 10 results and 0 failures
+[2025-03-11 00:09:55,720][flwr][INFO] - Server 18: about to sample 9 clients
+[2025-03-11 00:09:55,720][flwr][INFO] - Round 18: selected clients
+            ['2', '9', '4', '5', '0', '7', '3', '1', '8'] for fit.
+[2025-03-11 00:09:57,994][flwr][DEBUG] - fit_round 18: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:10:35,431][flwr][DEBUG] - fit_round 18 received 9 results and 0 failures
+[2025-03-11 00:10:36,515][flwr][INFO] - fit progress: (18, 1.2404106855392456, {'accuracy': 0.5389000177383423}, 867.4707489160355)
+[2025-03-11 00:10:36,515][flwr][DEBUG] - evaluate_round 18: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:10:38,045][flwr][DEBUG] - evaluate_round 18 received 9 results and 0 failures
+[2025-03-11 00:10:40,871][flwr][INFO] - Server 19: selected clients
+                ['9', '7', '5', '3', '0', '2', '6', '4', '1', '8'] for first phase evaluation.
+[2025-03-11 00:10:40,872][flwr][DEBUG] - evaluate_first_phase 19: strategy sampled 10 clients (out of 10)
+[2025-03-11 00:10:42,699][flwr][DEBUG] - evaluate_first_phase of round 19 received 10 results and 0 failures
+[2025-03-11 00:10:42,700][flwr][INFO] - Server 19: about to sample 9 clients
+[2025-03-11 00:10:42,700][flwr][INFO] - Round 19: selected clients
+            ['9', '5', '2', '6', '1', '3', '4', '0', '7'] for fit.
+[2025-03-11 00:10:45,115][flwr][DEBUG] - fit_round 19: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:11:25,577][flwr][DEBUG] - fit_round 19 received 9 results and 0 failures
+[2025-03-11 00:11:26,629][flwr][INFO] - fit progress: (19, 1.1750518083572388, {'accuracy': 0.5789999961853027}, 917.5837345829932)
+[2025-03-11 00:11:26,629][flwr][DEBUG] - evaluate_round 19: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:11:28,318][flwr][DEBUG] - evaluate_round 19 received 9 results and 0 failures
+[2025-03-11 00:11:31,059][flwr][INFO] - Server 20: selected clients
+                ['8', '0', '9', '7', '6', '1', '5', '3', '2', '4'] for first phase evaluation.
+[2025-03-11 00:11:31,059][flwr][DEBUG] - evaluate_first_phase 20: strategy sampled 10 clients (out of 10)
+[2025-03-11 00:11:32,843][flwr][DEBUG] - evaluate_first_phase of round 20 received 10 results and 0 failures
+[2025-03-11 00:11:32,843][flwr][INFO] - Server 20: about to sample 9 clients
+[2025-03-11 00:11:32,843][flwr][INFO] - Round 20: selected clients
+            ['2', '1', '3', '5', '9', '8', '0', '4', '7'] for fit.
+[2025-03-11 00:11:35,124][flwr][DEBUG] - fit_round 20: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:12:12,756][flwr][DEBUG] - fit_round 20 received 9 results and 0 failures
+[2025-03-11 00:12:13,816][flwr][INFO] - fit progress: (20, 1.2631711959838867, {'accuracy': 0.5163999795913696}, 964.7703127500135)
+[2025-03-11 00:12:13,816][flwr][DEBUG] - evaluate_round 20: strategy sampled 9 clients (out of 10)
+[2025-03-11 00:12:15,492][flwr][DEBUG] - evaluate_round 20 received 9 results and 0 failures
+[2025-03-11 00:12:15,492][flwr][INFO] - FL finished in 966.44599204103
+[2025-03-11 00:12:15,492][flwr][INFO] - app_fit: losses_distributed [(1, 2.3769864286526596), (2, 1.9015951608806723), (3, 1.7246231642690035), (4, 1.778100007194004), (5, 1.553227905577663), (6, 1.5667651084390017), (7, 1.5143576731591781), (8, 1.461007959122705), (9, 1.4692982016412468), (10, 1.600831140740083), (11, 1.4718106586154145), (12, 1.3138222774427257), (13, 1.3139708407444528), (14, 1.3136678060981442), (15, 1.3406121388520345), (16, 1.5041803294981932), (17, 1.2744100928162896), (18, 1.2121142775477294), (19, 1.1527070809643092), (20, 1.194943085103809)]
+[2025-03-11 00:12:15,492][flwr][INFO] - app_fit: metrics_distributed_fit {'variance_training_loss': [(1, 0.28251034138196585), (2, 0.20410448358155175), (3, 0.18268906529305096), (4, 0.16537502405273707), (5, 0.1448696088698769), (6, 0.14692933945935882), (7, 0.13010124051294297), (8, 0.1328281898744555), (9, 0.11798391733986241), (10, 0.12276306755253517), (11, 0.11858105974665595), (12, 0.11518502053746148), (13, 0.11930901001026399), (14, 0.10690497420440878), (15, 0.1080542850621489), (16, 0.09923358586375042), (17, 0.09703227450517128), (18, 0.1008586611482028), (19, 0.09332978464835612), (20, 0.09826922937725742)], 'average_training_loss': [(1, 1.168712431564927), (2, 1.070550694854723), (3, 0.989129859333237), (4, 0.9637580135216316), (5, 0.8910729481528202), (6, 0.88988481172257), (7, 0.8428537905630138), (8, 0.8465221604953209), (9, 0.8667540337062545), (10, 0.8116852823230956), (11, 0.7991237352705665), (12, 0.7786426465544436), (13, 0.7834014414499203), (14, 0.7470321164776882), (15, 0.7550756531871028), (16, 0.7832174309425883), (17, 0.7149919134875139), (18, 0.7254513013694022), (19, 0.7614003415736887), (20, 0.7112764892064862)], 'estimated_times': [(1, [40.51516873810503, 1.9120620939291497, 41.87647705522431, 31.62417266677946, 69.81808056264285, 27.750072059846186, 8.027837813623178, 22.382308479406408, 27.55591360969873]), (2, [41.87647705522431, 27.750072059846186, 80.15044042649758, 27.55591360969873, 31.62417266677946, 40.51516873810503, 1.9120620939291497, 69.81808056264285, 8.027837813623178]), (3, [22.382308479406408, 41.87647705522431, 69.81808056264285, 1.9120620939291497, 40.51516873810503, 31.62417266677946, 8.027837813623178, 27.750072059846186, 27.55591360969873]), (4, [40.51516873810503, 41.87647705522431, 69.81808056264285, 8.027837813623178, 31.62417266677946, 1.9120620939291497, 27.750072059846186, 80.15044042649758, 27.55591360969873]), (5, [69.81808056264285, 80.15044042649758, 31.62417266677946, 27.750072059846186, 40.51516873810503, 27.55591360969873, 8.027837813623178, 41.87647705522431, 16.786731359554807]), (6, [69.81808056264285, 41.87647705522431, 1.9120620939291497, 27.750072059846186, 27.55591360969873, 22.382308479406408, 31.62417266677946, 40.51516873810503, 8.027837813623178]), (7, [16.786731359554807, 27.55591360969873, 8.027837813623178, 40.51516873810503, 27.750072059846186, 31.62417266677946, 80.15044042649758, 41.87647705522431, 69.81808056264285]), (8, [8.027837813623178, 27.55591360969873, 1.9120620939291497, 31.62417266677946, 69.81808056264285, 27.750072059846186, 22.382308479406408, 40.51516873810503, 41.87647705522431]), (9, [31.62417266677946, 41.87647705522431, 80.15044042649758, 16.786731359554807, 1.9120620939291497, 27.750072059846186, 69.81808056264285, 27.55591360969873, 8.027837813623178]), (10, [8.027837813623178, 1.9120620939291497, 22.382308479406408, 27.750072059846186, 69.81808056264285, 41.87647705522431, 31.62417266677946, 27.55591360969873, 40.51516873810503]), (11, [8.027837813623178, 1.9120620939291497, 22.382308479406408, 31.62417266677946, 41.87647705522431, 40.51516873810503, 69.81808056264285, 27.750072059846186, 27.55591360969873]), (12, [27.55591360969873, 1.9120620939291497, 41.87647705522431, 8.027837813623178, 80.15044042649758, 40.51516873810503, 16.786731359554807, 27.750072059846186, 31.62417266677946]), (13, [41.87647705522431, 40.51516873810503, 31.62417266677946, 8.027837813623178, 69.81808056264285, 27.750072059846186, 22.382308479406408, 27.55591360969873, 1.9120620939291497]), (14, [27.750072059846186, 27.55591360969873, 80.15044042649758, 8.027837813623178, 16.786731359554807, 31.62417266677946, 40.51516873810503, 41.87647705522431, 69.81808056264285]), (15, [27.750072059846186, 1.9120620939291497, 69.81808056264285, 22.382308479406408, 8.027837813623178, 27.55591360969873, 40.51516873810503, 41.87647705522431, 31.62417266677946]), (16, [8.027837813623178, 69.81808056264285, 27.750072059846186, 31.62417266677946, 80.15044042649758, 27.55591360969873, 41.87647705522431, 1.9120620939291497, 16.786731359554807]), (17, [27.55591360969873, 16.786731359554807, 31.62417266677946, 80.15044042649758, 41.87647705522431, 8.027837813623178, 27.750072059846186, 69.81808056264285, 40.51516873810503]), (18, [16.786731359554807, 41.87647705522431, 27.750072059846186, 80.15044042649758, 8.027837813623178, 40.51516873810503, 31.62417266677946, 27.55591360969873, 1.9120620939291497]), (19, [8.027837813623178, 69.81808056264285, 80.15044042649758, 31.62417266677946, 1.9120620939291497, 16.786731359554807, 27.750072059846186, 27.55591360969873, 41.87647705522431]), (20, [1.9120620939291497, 16.786731359554807, 80.15044042649758, 31.62417266677946, 40.51516873810503, 41.87647705522431, 27.55591360969873, 27.750072059846186, 8.027837813623178])]}
+[2025-03-11 00:12:15,494][flwr][INFO] - app_fit: metrics_distributed {}
+[2025-03-11 00:12:15,494][flwr][INFO] - app_fit: losses_centralized [(0, 2.3047564029693604), (1, 2.387078046798706), (2, 1.8697803020477295), (3, 1.7171322107315063), (4, 1.7837376594543457), (5, 1.5463581085205078), (6, 1.5983747243881226), (7, 1.4955859184265137), (8, 1.4885482788085938), (9, 1.4801713228225708), (10, 1.531899094581604), (11, 1.4332270622253418), (12, 1.3477332592010498), (13, 1.3243428468704224), (14, 1.2818011045455933), (15, 1.3053888082504272), (16, 1.564728856086731), (17, 1.2563133239746094), (18, 1.2404106855392456), (19, 1.1750518083572388), (20, 1.2631711959838867)]
+[2025-03-11 00:12:15,494][flwr][INFO] - app_fit: metrics_centralized {'accuracy': [(0, 0.10000000149011612), (1, 0.13089999556541443), (2, 0.2842000126838684), (3, 0.3628999888896942), (4, 0.34470000863075256), (5, 0.4325000047683716), (6, 0.43299999833106995), (7, 0.45890000462532043), (8, 0.47110000252723694), (9, 0.42489999532699585), (10, 0.4242999851703644), (11, 0.48019999265670776), (12, 0.5120000243186951), (13, 0.5328999757766724), (14, 0.5310999751091003), (15, 0.5142999887466431), (16, 0.44830000400543213), (17, 0.5512999892234802), (18, 0.5389000177383423), (19, 0.5789999961853027), (20, 0.5163999795913696)]}
