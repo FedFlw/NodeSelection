@@ -21,9 +21,9 @@ batch_size_default: 32 # batch size
 fraction_samples_default: 1.0 
 
 # Which parameters to vary, NOTE: only one of these can be True
-local_epochs_varying: False # whether to vary local epochs
+local_epochs_varying: True # whether to vary local epochs
 batch_size_varying: False # whether to vary batch size
-fraction_samples_varying: false # whether to vary fraction of samples
+fraction_samples_varying: False # whether to vary fraction of samples
 
 comp_time: 5 # computation time in seconds for each client
 
