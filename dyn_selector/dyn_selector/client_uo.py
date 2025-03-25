@@ -43,11 +43,21 @@ class FlwrClient(fl.client.NumPyClient):
         return self.model.get_weights()
 
     def fit(self, parameters, config):
-        epochs = self.epochs
-        fraction_samples = self.fraction_samples
-        batch_size = self.batch_size
+        epochs = self.config["local_epochs"]
+        if epochs is None:
+            epochs = 2
+
+        batch_size = self.config["batch_size"]
+        if batch_size is None:
+            batch_size = 32
+
+        fraction_samples = self.config["fraction_samples"]
+        if fraction_samples is None:
+            fraction_samples = 1.0
 
         learning_rate = config["learning_rate"]
+        if learning_rate is None:
+            learning_rate = 0.001
 
         x_train_selected = self.x_train
         y_train_selected = self.y_train
