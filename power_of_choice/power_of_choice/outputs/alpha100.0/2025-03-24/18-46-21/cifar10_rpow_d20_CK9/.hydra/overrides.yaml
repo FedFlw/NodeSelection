@@ -1,0 +1,5 @@
+- optimizer=ecto
+- variant=rpow
+- seed=267
+- strategy.d=20
+- strategy.ck=9

@@ -118,9 +118,9 @@ def shift(x: np.ndarray, y: np.ndarray) -> XY:
 
 
 def create_partitions(
-    unpartitioned_dataset: XY,
-    iid_fraction: float,
-    num_partitions: int,
+        unpartitioned_dataset: XY,
+        iid_fraction: float,
+        num_partitions: int,
 ) -> XYList:
     """Create partitioned version of a training or test set.
 
@@ -146,9 +146,9 @@ def create_partitions(
 
 
 def create_partitioned_dataset(
-    keras_dataset: Tuple[XY, XY],
-    iid_fraction: float,
-    num_partitions: int,
+        keras_dataset: Tuple[XY, XY],
+        iid_fraction: float,
+        num_partitions: int,
 ) -> Tuple[PartitionedDataset, XY]:
     """Create partitioned version of keras dataset.
 
@@ -201,7 +201,7 @@ def adjust_y_shape(nda: np.ndarray) -> np.ndarray:
 
 
 def split_array_at_indices(
-    x: np.ndarray, split_idx: np.ndarray
+        x: np.ndarray, split_idx: np.ndarray
 ) -> List[List[np.ndarray]]:
     """Split an array `x` into list of elements using starting indices from.
 
@@ -239,7 +239,7 @@ def split_array_at_indices(
 
     list_samples_split: List[List[np.ndarray]] = [[] for _ in range(num_splits)]
     for j in range(num_splits):
-        tmp_x = x[split_idx[j] : split_idx[j + 1]]  # noqa: E203
+        tmp_x = x[split_idx[j]: split_idx[j + 1]]  # noqa: E203
         for sample in tmp_x:
             list_samples_split[j].append(sample)
 
@@ -247,7 +247,7 @@ def split_array_at_indices(
 
 
 def exclude_classes_and_normalize(
-    distribution: np.ndarray, exclude_dims: List[bool], eps: float = 1e-5
+        distribution: np.ndarray, exclude_dims: List[bool], eps: float = 1e-5
 ) -> np.ndarray:
     """Excludes classes from a distribution.
 
@@ -286,10 +286,10 @@ def exclude_classes_and_normalize(
 
 
 def sample_without_replacement(
-    distribution: np.ndarray,
-    list_samples: List[List[np.ndarray]],
-    num_samples: int,
-    empty_classes: List[bool],
+        distribution: np.ndarray,
+        list_samples: List[List[np.ndarray]],
+        num_samples: int,
+        empty_classes: List[bool],
 ) -> Tuple[XY, List[bool]]:
     """Sample from a list without replacement using a given distribution.
 
@@ -371,12 +371,12 @@ def get_partitions_distributions(partitions: XYList) -> Tuple[np.ndarray, List[i
 
 
 def create_lda_partitions(
-    dataset: XY,
-    dirichlet_dist: Optional[np.ndarray] = None,
-    num_partitions: int = 100,
-    concentration: Union[float, np.ndarray, List[float]] = 0.5,
-    accept_imbalanced: bool = False,
-    seed: Optional[Union[int, SeedSequence, BitGenerator, Generator]] = None,
+        dataset: XY,
+        dirichlet_dist: Optional[np.ndarray] = None,
+        num_partitions: int = 100,
+        concentration: Union[float, np.ndarray, List[float]] = 0.5,
+        accept_imbalanced: bool = False,
+        seed: Optional[Union[int, SeedSequence, BitGenerator, Generator]] = None,
 ) -> Tuple[XYList, np.ndarray]:
     r"""Create imbalanced non-iid partitions using Latent Dirichlet Allocation (LDA).
 
@@ -467,10 +467,10 @@ def create_lda_partitions(
                  ({dirichlet_dist.shape}) must match the provided number
                   of partitions and classes ({num_partitions},{classes.size})"""
             )
-        
+
     dirichlet_dist_samples = np.random.default_rng(seed).dirichlet(
-            alpha=concentration_num_samples, size=1
-        )[0]
+        alpha=concentration_num_samples, size=1
+    )[0]
 
     # Calculate the number of samples for each partition based on the dirichlet_dist_samples
     num_samples = [int(np.floor(dirichlet_dist_samples[i] * x.shape[0])) for i in range(num_partitions)]

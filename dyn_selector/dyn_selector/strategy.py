@@ -4,14 +4,15 @@ Needed only when the strategy is not yet implemented in Flower or because you wa
 extend or modify the functionality of an existing strategy.
 """
 
+import math
 from logging import WARNING
 from typing import Callable, Dict, List, Optional, Tuple
+
+from flwr.common.logger import log
 from flwr.common.typing import EvaluateIns, FitIns, MetricsAggregationFn, NDArrays, Parameters, Scalar, GetPropertiesIns
 from flwr.server.client_manager import ClientManager
 from flwr.server.client_proxy import ClientProxy
 from flwr.server.strategy.fedavg import WARNING_MIN_AVAILABLE_CLIENTS_TOO_LOW, FedAvg
-from flwr.common.logger import log
-import math
 
 
 class FedAvgWithDynamicSelection(FedAvg):
@@ -19,31 +20,31 @@ class FedAvgWithDynamicSelection(FedAvg):
 
     # pylint: disable=too-many-arguments,too-many-instance-attributes, line-too-long
     def __init__(
-        self,
-        *,
-        fraction_fit: float = 1.0,
-        fraction_evaluate: float = 1.0,
-        min_fit_clients: int = 2,
-        min_evaluate_clients: int = 2,
-        min_available_clients: int = 2,
-        evaluate_fn: Optional[
-            Callable[
-                [int, NDArrays, Dict[str, Scalar]],
-                Optional[Tuple[float, Dict[str, Scalar]]],
-            ]
-        ] = None,
-        on_fit_config_fn: Optional[Callable[[int], Dict[str, Scalar]]] = None,
-        on_evaluate_config_fn: Optional[Callable[[int], Dict[str, Scalar]]] = None,
-        accept_failures: bool = True,
-        initial_parameters: Optional[Parameters] = None,
-        fit_metrics_aggregation_fn: Optional[MetricsAggregationFn] = None,
-        evaluate_metrics_aggregation_fn: Optional[MetricsAggregationFn] = None,
-        decay_coefficient: float,
-        initial_sampling_rate: int,
-        max_local_epochs: int = 5,
-        batch_size: int = 32,
-        fraction_samples: float = 1.0,
-        use_RT: bool = False
+            self,
+            *,
+            fraction_fit: float = 1.0,
+            fraction_evaluate: float = 1.0,
+            min_fit_clients: int = 2,
+            min_evaluate_clients: int = 2,
+            min_available_clients: int = 2,
+            evaluate_fn: Optional[
+                Callable[
+                    [int, NDArrays, Dict[str, Scalar]],
+                    Optional[Tuple[float, Dict[str, Scalar]]],
+                ]
+            ] = None,
+            on_fit_config_fn: Optional[Callable[[int], Dict[str, Scalar]]] = None,
+            on_evaluate_config_fn: Optional[Callable[[int], Dict[str, Scalar]]] = None,
+            accept_failures: bool = True,
+            initial_parameters: Optional[Parameters] = None,
+            fit_metrics_aggregation_fn: Optional[MetricsAggregationFn] = None,
+            evaluate_metrics_aggregation_fn: Optional[MetricsAggregationFn] = None,
+            decay_coefficient: float,
+            initial_sampling_rate: int,
+            max_local_epochs: int = 5,
+            batch_size: int = 32,
+            fraction_samples: float = 1.0,
+            use_RT: bool = False
     ) -> None:
         """Federated Averaging strategy.
 
@@ -87,8 +88,8 @@ class FedAvgWithDynamicSelection(FedAvg):
         super().__init__()
 
         if (
-            min_fit_clients > min_available_clients
-            or min_evaluate_clients > min_available_clients
+                min_fit_clients > min_available_clients
+                or min_evaluate_clients > min_available_clients
         ):
             log(WARNING, WARNING_MIN_AVAILABLE_CLIENTS_TOO_LOW)
 
@@ -112,7 +113,7 @@ class FedAvgWithDynamicSelection(FedAvg):
         self.use_RT = use_RT
 
     def configure_fit(
-        self, server_round: int, parameters: Parameters, client_manager: ClientManager
+            self, server_round: int, parameters: Parameters, client_manager: ClientManager
     ) -> List[Tuple[ClientProxy, FitIns]]:
         """Configure the next round of training."""
 
@@ -123,7 +124,7 @@ class FedAvgWithDynamicSelection(FedAvg):
 
         # Compute number of clients to sample
         sample_size = max(round(sample_rate * num_available_clients), self.min_fit_clients)
-        
+
         # Sample clients
         clients = client_manager.sample(
             num_clients=sample_size
@@ -158,7 +159,7 @@ class FedAvgWithDynamicSelection(FedAvg):
                 # Compute scaling factor
                 scale_factor = ips / max_ips
 
-                if(ips == max_ips):
+                if (ips == max_ips):
                     local_epochs = self.max_local_epochs
                 else:
                     local_epochs = max(1, int(self.max_local_epochs * scale_factor))
@@ -169,16 +170,17 @@ class FedAvgWithDynamicSelection(FedAvg):
                     "fraction_samples": self.fraction_samples,
                 }
 
-                print(f"Client {client.cid} - IPS {ips} - Local epochs {local_epochs} - Fraction samples {self.fraction_samples}")
+                print(
+                    f"Client {client.cid} - IPS {ips} - Local epochs {local_epochs} - Fraction samples {self.fraction_samples}")
 
                 # Create fit instruction
                 fit_ins.append((client, FitIns(parameters, config)))
 
         # Return client/config pairs
         return fit_ins
-    
+
     def configure_evaluate(
-        self, server_round: int, parameters: Parameters, client_manager: ClientManager
+            self, server_round: int, parameters: Parameters, client_manager: ClientManager
     ) -> List[Tuple[ClientProxy, EvaluateIns]]:
         """Configure the next round of evaluation."""
         # Do not configure federated evaluation if fraction eval is 0.
@@ -201,7 +203,7 @@ class FedAvgWithDynamicSelection(FedAvg):
         sample_size = round(max(sample_rate * num_available_clients, self.min_fit_clients))
 
         print(f"Selected {sample_size} clients for round {server_round} evaluation.")
-        
+
         # Sample clients
         clients = client_manager.sample(
             num_clients=sample_size

@@ -7,22 +7,25 @@ This script reproduces results using dynamic selector and static optimizer techn
 """
 
 import os
+from logging import INFO
 from typing import Dict, List, Optional, Tuple
-from models import create_MLP_model, create_CNN_model
-from flwr.common.typing import Metrics
-from utils import save_results_as_pickle
-from client import gen_client_fn
+
+import flwr as fl
 import hydra
 import numpy as np
-import flwr as fl
-from logging import DEBUG, INFO
 from flwr.common.logger import log
+from flwr.common.typing import Metrics
+from hydra.core.hydra_config import HydraConfig
 from hydra.utils import instantiate
 from omegaconf import DictConfig, OmegaConf
-from hydra.core.hydra_config import HydraConfig
+
+from client import gen_client_fn
+from models import create_MLP_model, create_CNN_model
+from utils import save_results_as_pickle
 
 # Make TensorFlow logs less verbose
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+
 
 @hydra.main(config_path="conf", config_name="base", version_base=None)
 def main(cfg: DictConfig) -> None:
@@ -76,12 +79,13 @@ def main(cfg: DictConfig) -> None:
             config["local_epochs"] = cfg.local_epochs
             config["num_samples"] = cfg.num_samples
 
-            log(INFO, f"Round {server_round} training config: batch_size={config['batch_size']}, local_epochs={config['local_epochs']}, num_samples={config['num_samples']}")
+            log(INFO,
+                f"Round {server_round} training config: batch_size={config['batch_size']}, local_epochs={config['local_epochs']}, num_samples={config['num_samples']}")
 
             return config
-        
+
         return fit_config
-    
+
     def get_fit_metrics_aggregation_fn():
         def fit_metrics_aggregation_fn(results: List[Tuple[int, Metrics]]) -> Metrics:
             # Initialize lists to store training losses
@@ -106,7 +110,7 @@ def main(cfg: DictConfig) -> None:
             return aggregated_metrics
 
         return fit_metrics_aggregation_fn
-    
+
     def get_evaluate_fn(model):
         """Return an evaluation function for server-side evaluation."""
 
@@ -118,23 +122,23 @@ def main(cfg: DictConfig) -> None:
 
         # The `evaluate` function will be called after every round
         def evaluate(
-            server_round: int,
-            parameters: fl.common.NDArrays,
-            config: Dict[str, fl.common.Scalar],
+                server_round: int,
+                parameters: fl.common.NDArrays,
+                config: Dict[str, fl.common.Scalar],
         ) -> Optional[Tuple[float, Dict[str, fl.common.Scalar]]]:
             model.set_weights(parameters)  # Update model with the latest parameters
             loss, accuracy = model.evaluate(x_test, y_test, verbose=2)
             return loss, {"accuracy": accuracy}
 
         return evaluate
-    
+
     if cfg.is_cnn:
         server_model = create_CNN_model()
     else:
         server_model = create_MLP_model()
-    
+
     server_model.compile("adam", "sparse_categorical_crossentropy", metrics=["accuracy"])
-    
+
     # instantiate strategy according to config. Here we pass other arguments
     # that are only defined at run time.
     strategy = instantiate(
@@ -175,6 +179,7 @@ def main(cfg: DictConfig) -> None:
     # save results as a Python pickle using a file_path
     # the directory created by Hydra for each run
     save_results_as_pickle(history, file_path=save_path, extra_results={})
+
 
 if __name__ == "__main__":
     main()

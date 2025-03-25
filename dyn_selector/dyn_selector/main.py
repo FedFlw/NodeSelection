@@ -1,15 +1,17 @@
 import os
 from typing import Dict, List, Optional, Tuple
-from flwr.common.typing import Metrics
-from utils import save_results_as_pickle
-import numpy as np
-from client import gen_client_fn
-from models import create_MLP_model, create_CNN_model
-import hydra
-from hydra.utils import instantiate
+
 import flwr as fl
-from omegaconf import DictConfig, OmegaConf
+import hydra
+import numpy as np
+from flwr.common.typing import Metrics
 from hydra.core.hydra_config import HydraConfig
+from hydra.utils import instantiate
+from omegaconf import DictConfig, OmegaConf
+
+from client import gen_client_fn
+from models import create_CNN_model
+from utils import save_results_as_pickle
 
 
 @hydra.main(config_path="conf", config_name="base", version_base=None)
@@ -20,7 +22,7 @@ def main(cfg: DictConfig) -> None:
 
     # 3. Define your clients
     client_fn = gen_client_fn()
-    
+
     def get_fit_metrics_aggregation_fn():
         def fit_metrics_aggregation_fn(results: List[Tuple[int, Metrics]]) -> Metrics:
             # Initialize lists to store training losses
@@ -49,13 +51,14 @@ def main(cfg: DictConfig) -> None:
         x_test = np.load(os.path.join(test_folder, "x_test.npy"))
         y_test = np.load(os.path.join(test_folder, "y_test.npy"))
 
-        def evaluate(server_round: int, parameters: fl.common.NDArrays, config: Dict[str, fl.common.Scalar]) -> Optional[Tuple[float, Dict[str, fl.common.Scalar]]]:
+        def evaluate(server_round: int, parameters: fl.common.NDArrays, config: Dict[str, fl.common.Scalar]) -> \
+        Optional[Tuple[float, Dict[str, fl.common.Scalar]]]:
             model.set_weights(parameters)
             loss, accuracy = model.evaluate(x_test, y_test, verbose=2)
             return loss, {"accuracy": accuracy}
 
         return evaluate
-    
+
     if cfg.is_cnn:
         server_model = create_CNN_model()
     else:
@@ -76,7 +79,7 @@ def main(cfg: DictConfig) -> None:
         num_clients=cfg.num_clients,
         client_resources={"num_cpus": 1},
         config=fl.server.ServerConfig(cfg.num_rounds),
-        strategy= strategy,
+        strategy=strategy,
         ray_init_args={"ignore_reinit_error": True, "include_dashboard": False},
     )
 

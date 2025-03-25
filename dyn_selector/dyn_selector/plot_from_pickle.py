@@ -7,7 +7,7 @@ from logging import INFO
 
 from flwr.common.logger import log
 
-from dyn_selector.utils import (
+from utils import (
     plot_metrics_from_histories,
     plot_variances_training_loss_from_history,
 )

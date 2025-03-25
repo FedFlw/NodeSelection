@@ -1,10 +1,12 @@
+import math
 from typing import Callable
-from dataset import load_dataset
-from models import create_CNN_model, create_MLP_model
-import tensorflow as tf
+
 import flwr as fl
 import numpy as np
-import math
+
+from dataset import load_dataset
+from models import create_CNN_model
+
 
 class FlwrClient(fl.client.NumPyClient):
     def __init__(self, model, x_train, y_train) -> None:
@@ -64,14 +66,13 @@ class FlwrClient(fl.client.NumPyClient):
 
 
 def gen_client_fn(is_cnn: bool = False) -> Callable[[str], fl.client.Client]:
-
     def client_fn(cid: str) -> fl.client.Client:
         # Load model
-        if(is_cnn):
+        if (is_cnn):
             model = create_CNN_model()
         else:
             model = create_CNN_model()
-        
+
         model.compile("adam", "sparse_categorical_crossentropy", metrics=["accuracy"])
 
         # Load data partition (divide MNIST into NUM_CLIENTS distinct partitions)
@@ -79,8 +80,5 @@ def gen_client_fn(is_cnn: bool = False) -> Callable[[str], fl.client.Client]:
 
         # Create and return client
         return FlwrClient(model, x_train_cid, y_train_cid)
-    
+
     return client_fn
-
-
-

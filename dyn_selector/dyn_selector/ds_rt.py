@@ -7,19 +7,22 @@ model is going to be evaluated, etc. At the end, this script saves the results.
 # feel free to remove some if aren't needed
 import os
 from typing import Dict, List, Optional, Tuple
-from utils import save_results_as_pickle
-from models import create_CNN_model, create_MLP_model
-from client_rt import gen_client_fn
+
+import flwr as fl
 import hydra
 import numpy as np
-import flwr as fl
-from hydra.utils import instantiate
-from omegaconf import DictConfig, OmegaConf
+from client_rt import gen_client_fn
 from flwr.common.typing import Metrics
 from hydra.core.hydra_config import HydraConfig
+from hydra.utils import instantiate
+from omegaconf import DictConfig, OmegaConf
+
+from models import create_CNN_model, create_MLP_model
+from utils import save_results_as_pickle
 
 # Make TensorFlow logs less verbose
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+
 
 @hydra.main(config_path="conf", config_name="base", version_base=None)
 def main(cfg: DictConfig) -> None:
@@ -78,7 +81,7 @@ def main(cfg: DictConfig) -> None:
             return aggregated_metrics
 
         return fit_metrics_aggregation_fn
-    
+
     def get_evaluate_fn(model):
         """Return an evaluation function for server-side evaluation."""
 
@@ -90,24 +93,23 @@ def main(cfg: DictConfig) -> None:
 
         # The `evaluate` function will be called after every round
         def evaluate(
-            server_round: int,
-            parameters: fl.common.NDArrays,
-            config: Dict[str, fl.common.Scalar],
+                server_round: int,
+                parameters: fl.common.NDArrays,
+                config: Dict[str, fl.common.Scalar],
         ) -> Optional[Tuple[float, Dict[str, fl.common.Scalar]]]:
             model.set_weights(parameters)  # Update model with the latest parameters
             loss, accuracy = model.evaluate(x_test, y_test, verbose=2)
             return loss, {"accuracy": accuracy}
 
         return evaluate
-    
+
     if cfg.is_cnn:
         server_model = create_CNN_model()
     else:
         server_model = create_MLP_model()
-    
+
     server_model.compile("adam", "sparse_categorical_crossentropy", metrics=["accuracy"])
 
-    
     # instantiate strategy according to config. Here we pass other arguments
     # that are only defined at run time.
     strategy = instantiate(
@@ -115,9 +117,9 @@ def main(cfg: DictConfig) -> None:
         evaluate_fn=get_evaluate_fn(server_model),
         fit_metrics_aggregation_fn=get_fit_metrics_aggregation_fn(),
         max_local_epochs=cfg.epochs_max,
-        batch_size = cfg.batch_size_default,
-        fraction_samples = cfg.fraction_samples_default,
-        use_RT=True 
+        batch_size=cfg.batch_size_default,
+        fraction_samples=cfg.fraction_samples_default,
+        use_RT=True
     )
 
     # 5. Start Simulation
@@ -157,6 +159,7 @@ def main(cfg: DictConfig) -> None:
     # save results as a Python pickle using a file_path
     # the directory created by Hydra for each run
     save_results_as_pickle(history, file_path=save_path, extra_results={})
+
 
 if __name__ == "__main__":
     main()

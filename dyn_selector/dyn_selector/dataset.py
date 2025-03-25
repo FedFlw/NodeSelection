@@ -9,10 +9,10 @@ partitioned, please include all those functions and logic in the
 defined here of course.
 """
 import os
-from typing import Optional, Tuple
+from typing import Tuple
+
 import numpy as np
 import tensorflow as tf
-from omegaconf import DictConfig
 
 
 def load_dataset(cid: str, is_cnn: bool = False) -> Tuple[np.ndarray, np.ndarray]:
@@ -34,11 +34,11 @@ def load_dataset(cid: str, is_cnn: bool = False) -> Tuple[np.ndarray, np.ndarray
         folder = "cifar10"
 
     loaded_ds = tf.data.experimental.load(
-            path=os.path.join(folder, cid), element_spec=None, compression=None, reader_func=None
-        )
-    
+        path=os.path.join(folder, cid), element_spec=None, compression=None, reader_func=None
+    )
+
     # Unpack the loaded dataset into NumPy arrays
     x_train_cid = np.asarray(list(loaded_ds.map(lambda x, y: x)))
     y_train_cid = np.asarray(list(loaded_ds.map(lambda x, y: y)))
-        
+
     return x_train_cid, y_train_cid

@@ -5,7 +5,6 @@ example, you may define here things like: loading a model from a checkpoint, sav
 results, plotting.  
 """
 
-
 import pickle
 from pathlib import Path
 from secrets import token_hex
@@ -16,10 +15,10 @@ from flwr.server.history import History
 
 
 def save_results_as_pickle(
-    history: History,
-    file_path: Union[str, Path],
-    extra_results: Optional[Dict] = None,
-    default_filename: Optional[str] = "results.pkl",
+        history: History,
+        file_path: Union[str, Path],
+        extra_results: Optional[Dict] = None,
+        default_filename: Optional[str] = "results.pkl",
 ) -> None:
     """Save results from simulation to pickle.
 
@@ -77,9 +76,9 @@ def save_results_as_pickle(
 
 
 def plot_dloss_from_history(
-    hist: History,
-    save_plot_path: Path,
-    suffix: Optional[str] = "",
+        hist: History,
+        save_plot_path: Path,
+        suffix: Optional[str] = "",
 ) -> None:
     """Plot from Flower server History LOSS ONLY, TO BE REMOVED LATER.
 
@@ -112,9 +111,9 @@ def plot_dloss_from_history(
 
 
 def plot_metric_from_history(
-    hist: History,
-    save_plot_path: Path,
-    suffix: Optional[str] = "",
+        hist: History,
+        save_plot_path: Path,
+        suffix: Optional[str] = "",
 ) -> None:
     """Plot from Flower server History.
 
@@ -163,9 +162,9 @@ def plot_metric_from_history(
 
 
 def plot_variance_training_loss_from_history(
-    hist: History,
-    save_plot_path: Path,
-    suffix: Optional[str] = "",
+        hist: History,
+        save_plot_path: Path,
+        suffix: Optional[str] = "",
 ) -> None:
     """Plot from Flower server History.
 
@@ -206,9 +205,9 @@ def plot_variance_training_loss_from_history(
 
 
 def plot_metrics_from_histories(
-    title_and_histories: List[Tuple[str, History]],
-    save_plot_path: Path,
-    suffix: Optional[str] = "",
+        title_and_histories: List[Tuple[str, History]],
+        save_plot_path: Path,
+        suffix: Optional[str] = "",
 ) -> None:
     """Plot metrics from Flower server Histories.
 
@@ -268,9 +267,9 @@ def plot_metrics_from_histories(
 
 
 def plot_variances_training_loss_from_history(
-    title_and_histories: List[Tuple[str, History]],
-    save_plot_path: Path,
-    suffix: Optional[str] = "",
+        title_and_histories: List[Tuple[str, History]],
+        save_plot_path: Path,
+        suffix: Optional[str] = "",
 ) -> None:
     """Plot variances from Flower server History.
 

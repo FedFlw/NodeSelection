@@ -7,16 +7,18 @@ model is going to be evaluated, etc. At the end, this script saves the results.
 # feel free to remove some if aren't needed
 import os
 from typing import Dict, List, Optional, Tuple
-from flwr.common.typing import Metrics
-from utils import save_results_as_pickle
+
+import flwr as fl
+import hydra
 import numpy as np
 from client_uo import gen_client_fn
-from models import create_MLP_model, create_CNN_model
-import hydra
-from hydra.utils import instantiate
-import flwr as fl
-from omegaconf import DictConfig, OmegaConf
+from flwr.common.typing import Metrics
 from hydra.core.hydra_config import HydraConfig
+from hydra.utils import instantiate
+from omegaconf import DictConfig, OmegaConf
+
+from models import create_MLP_model, create_CNN_model
+from utils import save_results_as_pickle
 
 
 @hydra.main(config_path="conf", config_name="base", version_base=None)
@@ -42,12 +44,12 @@ def main(cfg: DictConfig) -> None:
     # 3. Define your clients
     # Define a function that returns another function that will be used during
     # simulation to instantiate each individual client
-    client_fn = gen_client_fn((cfg.epochs_min, cfg.epochs_max), 
-                              (cfg.fraction_samples_min, cfg.fraction_samples_max), 
-                              (cfg.batch_size_min, cfg.batch_size_max), 
-                              cfg.num_clients, 
+    client_fn = gen_client_fn((cfg.epochs_min, cfg.epochs_max),
+                              (cfg.fraction_samples_min, cfg.fraction_samples_max),
+                              (cfg.batch_size_min, cfg.batch_size_max),
+                              cfg.num_clients,
                               cfg.is_cnn)
-    
+
     def get_fit_metrics_aggregation_fn():
         def fit_metrics_aggregation_fn(results: List[Tuple[int, Metrics]]) -> Metrics:
             # Initialize lists to store training losses
@@ -84,16 +86,16 @@ def main(cfg: DictConfig) -> None:
 
         # The `evaluate` function will be called after every round
         def evaluate(
-            server_round: int,
-            parameters: fl.common.NDArrays,
-            config: Dict[str, fl.common.Scalar],
+                server_round: int,
+                parameters: fl.common.NDArrays,
+                config: Dict[str, fl.common.Scalar],
         ) -> Optional[Tuple[float, Dict[str, fl.common.Scalar]]]:
             model.set_weights(parameters)  # Update model with the latest parameters
             loss, accuracy = model.evaluate(x_test, y_test, verbose=2)
             return loss, {"accuracy": accuracy}
 
         return evaluate
-    
+
     if cfg.is_cnn:
         server_model = create_CNN_model()
     else:
@@ -123,7 +125,7 @@ def main(cfg: DictConfig) -> None:
         num_clients=cfg.num_clients,
         client_resources={"num_cpus": 1},
         config=fl.server.ServerConfig(cfg.num_rounds),
-        strategy= strategy,
+        strategy=strategy,
         ray_init_args=ray_init_args,
     )
 

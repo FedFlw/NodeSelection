@@ -1,0 +1,5 @@
+- optimizer=ecto
+- variant=base
+- seed=663
+- strategy.d=20
+- strategy.ck=9
