@@ -53,9 +53,7 @@ class FlwrClient(fl.client.NumPyClient):
         if fraction_samples is None:
             fraction_samples = 1.0
 
-        learning_rate = config["learning_rate"]
-        if learning_rate is None:
-            learning_rate = 0.001
+        learning_rate = 0.001
 
         x_train_selected = self.x_train
         y_train_selected = self.y_train
