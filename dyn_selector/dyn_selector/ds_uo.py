@@ -44,11 +44,14 @@ def main(cfg: DictConfig) -> None:
     # 3. Define your clients
     # Define a function that returns another function that will be used during
     # simulation to instantiate each individual client
-    client_fn = gen_client_fn((cfg.epochs_min, cfg.epochs_max),
+    client_fn = gen_client_fn(cfg.client.mean_ips,      
+                              cfg.client.var_ips,       
+                              (cfg.epochs_min, cfg.epochs_max),
                               (cfg.fraction_samples_min, cfg.fraction_samples_max),
                               (cfg.batch_size_min, cfg.batch_size_max),
                               cfg.num_clients,
-                              cfg.is_cnn)
+                              cfg.is_cnn
+                             )
 
     def get_fit_metrics_aggregation_fn():
         def fit_metrics_aggregation_fn(results: List[Tuple[int, Metrics]]) -> Metrics:
