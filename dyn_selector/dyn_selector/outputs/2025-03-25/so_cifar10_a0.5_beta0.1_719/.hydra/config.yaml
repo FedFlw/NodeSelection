@@ -1,0 +1,38 @@
+num_clients: 10
+num_rounds: 20
+batch_size: 32
+local_epochs: 4
+num_samples: null
+epochs_min: 1
+epochs_max: 5
+batch_size_min: 32
+batch_size_max: 128
+fraction_samples_min: 0.1
+fraction_samples_max: 0.8
+local_epochs_default: 4
+batch_size_default: 32
+fraction_samples_default: 1.0
+local_epochs_varying: false
+batch_size_varying: false
+fraction_samples_varying: true
+comp_time: 30
+seed: 719
+alpha: 0.5
+is_cnn: true
+client_resources:
+  num_cpus: 1
+  num_gpus: 0
+dataset:
+  dataset: cifar10
+  num_classes: 10
+optimizer: so
+strategy:
+  _target_: strategy.FedAvgWithDynamicSelection
+  min_fit_clients: 2
+  min_evaluate_clients: 2
+  min_available_clients: 2
+  decay_coefficient: 0.1
+  initial_sampling_rate: 0.2
+client:
+  mean_ips: 100
+  var_ips: 50
