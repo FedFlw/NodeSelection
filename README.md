@@ -19,3 +19,4 @@ Produced results are already available in folders [/power_of_choice/outputs](pow
 
 To produce the plots reported in the paper run notebook [plot_results.ipynb](power_of_choice/power_of_choice/plot_results.ipynb).
 Plots will be saved to folder [power_of_choice/plots](power_of_choice/power_of_choice/plots).
+Note that the nodebook has been tested in an environment with the flwr module v.1.15.2.
