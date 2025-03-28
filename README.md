@@ -1,9 +1,21 @@
-# Heterogeneity Management for Edge-Based Federated Learning
-HETEROGENEITY ANALYSIS IN FEDERATED LEARNING
-Abstract:
-The rise of machine learning—fueled by open datasets, affordable processing, and cost-effective storage—has accelerated model development across various applications, from computer vision to natural language processing. Federated learning (FL) is a technique to train multiple individual models progressively aggregated by a central server. This approach maintains data privacy while deriving collective knowledge from the distributed user data. However, FL introduces complexities such as statistical and system heterogeneity, requiring innovative algorithms for convergence in non-IID datasets and performance optimization of the FL system. Despite different solutions to address statistical and system heterogeneity in FL, they often lack a proper evaluation and comparison. This work proposes an evaluation methodology for analyzing and comparing dynamic client selection and resource-aware workload allocation techniques, two promising directions to address the problem of heterogeneity in FL. We include an experimental phase to assess the performance and impact of these algorithms compared to baseline techniques, by considering different datasets, model architectures, and degrees of heterogeneity in the training data. The results showcase the competitiveness of the proposed strategies, particularly in heterogeneous settings, providing insights into their effectiveness, convergence speed, and stability. Finally, we discuss and highlight the importance of strategic client selection and workload distribution for effective and stable model training in FL environments. By implementing our solution in Flower, a flexible user-friendly FL framework, we prioritize the reproducibility and extensibility of the experiments, two crucial properties for advancing research in FL.
+# Architecting Federated Learning Systems: A Requirement-Driven Approach
 
-Directory Structure
-dyn_selector directory: Contains the code for the experiments using dynamic selector from paper Ji et al. 2021.
-power_of_choice directory: Contains the code for the experiments using the Power of Choice family of selectors, based on the paper by YJ Cho et al. 2022.
-In each subdirectory, there is a README.md file explaining how to setup and replicate the experiments.
+**Abstract:** The emerging Federated Learning (FL) paradigm offers significant advantages over the traditional centralized architecture of machine learning (ML) systems by reducing privacy risks and distributing computational load. However, the network topology (i.e., the number of available clients, and their characteristics) has a critical impact on performance metrics. This work investigates how application-specific requirements can drive architectural choices and how such choices impact FL performance. Specifically, we present a requirement-driven reference architecture for FL applications. Using a standard benchmark, we empirically evaluate 20 architecture realizations in different boundary conditions.  The effectiveness of each realization is assessed based on the accuracy of the trained model and the wall-clock time required to complete the training. By combining our experimental results with existing qualitative studies from the literature, we devise a guideline to help prospective users select the most suitable configuration based on their application-specific non-functional requirements. 
+
+## Running the Experiments
+
+****Hardware Setup:**** These experiments were run on a desktop machine with 16GB of memory and 10 CPU cores. 
+Performing 5 repetitions for each configuration takes approximately 4.2 days.
+
+To run the experiments with the random baseline (FedAvg) and the three variants of power-of-choice, run script [./power_of_choice/run_simulations.sh](power_of_choice/power_of_choice/run_simulations.sh).
+
+To run the experiments with Dynamic Sampling, run script [./dyn_selector/run_simulations.sh](dyn_selector/dyn_selector/run_simulations.sh).
+
+## Expected Results
+
+Produced results are already available in folders [/power_of_choice/outputs](power_of_choice/power_of_choice/outputs) and [/dyn_selector/outputs](dyn_selector/dyn_selector/outputs).
+
+## Plotting the results
+
+To produce the plots reported in the paper run notebook [plot_results.ipynb](power_of_choice/power_of_choice/plot_results.ipynb).
+Plots will be saved to folder [power_of_choice/plots](power_of_choice/power_of_choice/plots).
